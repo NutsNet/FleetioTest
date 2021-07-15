@@ -17,13 +17,20 @@ extension UIColor {
     }
 }
 
+enum Orientation { case none, portrait, landscape }
+
 class Tool: NSObject {
+    var orientation = Orientation.none
+    
     var currentDeviceWt: CGFloat = 0
     var currentDeviceHt: CGFloat = 0
     
     static let shared = Tool()
     override init() {
         super.init()
+        
+        // Notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.checkDeviceOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         // Set device size
         if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
@@ -34,4 +41,15 @@ class Tool: NSObject {
             currentDeviceHt = UIScreen.main.bounds.width
         }
     }
+    
+    @objc private func checkDeviceOrientation() {
+        if (UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown) && orientation != .portrait {
+            orientation = .portrait
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
+        } else if (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) && orientation != .landscape {
+            orientation = .landscape
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
+        }
+    }
+    
 }

@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 
 class Api: NSObject {
+    var aApiFuelEntries = [Dictionary<String,Any>]()
     
     static let shared = Api()
     override init() {
@@ -17,7 +18,7 @@ class Api: NSObject {
         
     }
     
-    func apiGetFuelEntries(escap:@escaping (String, Array<Dictionary<String,Any>>) -> Void) {
+    func apiGetFuelEntries(escap:@escaping (Bool) -> Void) {
         let url: String =  "https://secure.fleetio.com/api/v1/fuel_entries"
         
         let headers: HTTPHeaders = [
@@ -31,12 +32,13 @@ class Api: NSObject {
             switch response.result {
             case .success(let value):
                 if let aFuelEntries = value as? Array<Dictionary<String, Any>> {
-                    escap("success", aFuelEntries)
+                    self.aApiFuelEntries = aFuelEntries
+                    escap(false)
                 } else {
-                    escap("error",[])
+                    escap(true)
                 }
             case .failure(let error):
-                escap("error",[])
+                escap(true)
                 print("Error in apiGetFuelEntries: \(error.localizedDescription)")
             }
         }
