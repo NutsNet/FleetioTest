@@ -1,0 +1,6 @@
+framework module Pods_FleetioTest {
+  umbrella header "Pods-FleetioTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
