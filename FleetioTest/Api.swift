@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class Api: NSObject {
-    var aApiFuelEntries = [Dictionary<String,Any>]()
+    var aApiFuelEntries = [FuelEntrie]()
     
     static let shared = Api()
     override init() {
@@ -32,7 +32,24 @@ class Api: NSObject {
             switch response.result {
             case .success(let value):
                 if let aFuelEntries = value as? Array<Dictionary<String, Any>> {
-                    self.aApiFuelEntries = aFuelEntries
+                    for fe in aFuelEntries {
+                        let fuelEntrie = FuelEntrie()
+                        
+                        if let date = fe["date"] { if date as? String != nil { fuelEntrie.date = date as! String }}
+                        if let reference = fe["reference"] { if reference as? String != nil { fuelEntrie.reference = reference as! String }}
+                        if let vendor_name = fe["vendor_name"] { if vendor_name as? String != nil { fuelEntrie.vendor_name = vendor_name as! String }}
+                        if let vehicle_name = fe["vehicle_name"] { if vehicle_name as? String != nil { fuelEntrie.vehicle_name = vehicle_name as! String }}
+                        if let fuel_type_name = fe["fuel_type_name"] { if fuel_type_name as? String != nil { fuelEntrie.fuel_type_name = fuel_type_name as! String }}
+                        
+                        if let cost_per_hr = fe["cost_per_hr"] { if cost_per_hr as? Double != nil { fuelEntrie.cost_per_hr = cost_per_hr as! Double }}
+                        if let cost_per_mi = fe["cost_per_mi"] { if cost_per_mi as? Double != nil { fuelEntrie.cost_per_mi = cost_per_mi as! Double }}
+                        
+                        fuelEntrie.distance_mi = self.apiGetDistance()
+                        
+                        self.aApiFuelEntries.append(fuelEntrie)
+                        
+                        self.apiPrintFuelEntries()
+                    }
                     escap(false)
                 } else {
                     escap(true)
@@ -41,6 +58,30 @@ class Api: NSObject {
                 escap(true)
                 print("Error in apiGetFuelEntries: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func apiGetDistance() -> Double {
+        let distance: Double = -1
+        return distance
+    }
+    
+    func apiPrintFuelEntries() {
+        for fe in aApiFuelEntries {
+            print("********** ********** ********** **********")
+            print("date                  : \(fe.date)")
+            print("reference             : \(fe.reference)")
+            print("vendor_name           : \(fe.vendor_name)")
+            print("vehicle_name          : \(fe.vehicle_name)")
+            print("fuel_type_name        : \(fe.fuel_type_name)")
+            
+            print("cost_per_hr           : \(fe.cost_per_hr)")
+            print("cost_per_mi           : \(fe.cost_per_mi)")
+            
+            print("us_gallons            : \(fe.cost_per_hr)")
+            print("price_per_volume_unit : \(fe.cost_per_mi)")
+            
+            print("distance_mi           : \(fe.distance_mi)")
         }
     }
 }

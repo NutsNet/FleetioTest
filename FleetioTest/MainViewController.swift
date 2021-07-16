@@ -154,8 +154,6 @@ class MainViewController: UIViewController, TableViewDelegate {
                 if self.api.aApiFuelEntries.isEmpty {
                     self.mainDisplayAlert(nb: 1, txt: "There are no fuel entries.")
                 } else {
-                    print(self.api.aApiFuelEntries)
-                    
                     UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
                         self.mainTv.alpha = 1
                     }) { (finished) -> Void in
