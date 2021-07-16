@@ -11,6 +11,8 @@ import Alamofire
 class Api: NSObject {
     var aApiFuelEntries = [FuelEntrie]()
     
+    var userLoc = [0.0, 0.0]
+    
     static let shared = Api()
     override init() {
         super.init()
@@ -44,11 +46,18 @@ class Api: NSObject {
                         if let cost_per_hr = fe["cost_per_hr"] { if cost_per_hr as? Double != nil { fuelEntrie.cost_per_hr = cost_per_hr as! Double }}
                         if let cost_per_mi = fe["cost_per_mi"] { if cost_per_mi as? Double != nil { fuelEntrie.cost_per_mi = cost_per_mi as! Double }}
                         
+                        if let geolocation = fe["geolocation"] as? Dictionary<String, Any> {
+                            if let latitude = geolocation["latitude"], let longitude = geolocation["longitude"] {
+                                if latitude as? Double != nil { fuelEntrie.latitude = latitude as! Double }
+                                if longitude as? Double != nil { fuelEntrie.longitude = longitude as! Double }
+                            }
+                        }
+                        
                         fuelEntrie.distance_mi = self.apiGetDistance()
                         
                         self.aApiFuelEntries.append(fuelEntrie)
                         
-                        self.apiPrintFuelEntries()
+                        //self.apiPrintFuelEntries()
                     }
                     escap(false)
                 } else {
@@ -81,6 +90,8 @@ class Api: NSObject {
             print("us_gallons            : \(fe.cost_per_hr)")
             print("price_per_volume_unit : \(fe.cost_per_mi)")
             
+            print("latitude              : \(fe.latitude)")
+            print("longitude             : \(fe.longitude)")
             print("distance_mi           : \(fe.distance_mi)")
         }
     }

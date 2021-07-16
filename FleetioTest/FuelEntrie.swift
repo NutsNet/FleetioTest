@@ -20,5 +20,7 @@ class FuelEntrie: NSObject {
     var us_gallons: Double = -1
     var price_per_volume_unit: Double = -1
     
+    var latitude: Double = -1
+    var longitude: Double = -1
     var distance_mi: Double = -1
 }

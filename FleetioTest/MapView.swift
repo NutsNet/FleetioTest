@@ -10,6 +10,8 @@ import MapKit
 import CoreLocation
 
 class MapView: UIView, CLLocationManagerDelegate {
+    let api = Api.shared
+    
     let mapMkVi = MKMapView()
     let mapLb = UILabel()
     
@@ -58,12 +60,26 @@ class MapView: UIView, CLLocationManagerDelegate {
         let vtMapLbCst = NSLayoutConstraint(item: mapLb, attribute: .top, relatedBy: .equal, toItem: mapMkVi, attribute: .bottom, multiplier: 1, constant: 0)
         let vbMapLbCst = NSLayoutConstraint(item: mapLb, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([hlMapLbCst, hrMapLbCst, vtMapLbCst, vbMapLbCst])
+        
+        mapUpdateUserLoc()
+    }
+    
+    private func mapUpdateUserLoc() {
+        if let mapLocation = mapLoc.location {
+            api.userLoc[0] = mapLocation.coordinate.latitude
+            api.userLoc[1] = mapLocation.coordinate.longitude
+            
+            print(api.userLoc)
+        } else {
+            print("Cannot update the user location")
+        }
     }
     
     func mapLocCheck(escap: @escaping (UInt) -> Void) {
         if CLLocationManager.locationServicesEnabled() {
             switch mapLoc.authorizationStatus {
             case .authorizedAlways, .authorizedWhenInUse:
+                mapUpdateUserLoc()
                 escap(1)
                 break
             case .denied:
@@ -98,8 +114,6 @@ class MapView: UIView, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil {
-            
-        }
+        if locations.first != nil { }
     }
 }

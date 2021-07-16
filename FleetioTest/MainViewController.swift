@@ -134,10 +134,10 @@ class MainViewController: UIViewController, TableViewDelegate {
     
     @objc private func mainGetLoc() {
         mapVi.mapLocCheck() { eta in
-            if eta == 0 {
-                self.mapVi.mapLocGet()
-            } else if eta == 2 {
+            if eta == 2 {
                 self.mainDisplayAlert(nb: 2, txt: "")
+            } else {
+                self.mapVi.mapLocGet()
             }
         }
         
