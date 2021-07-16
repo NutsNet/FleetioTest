@@ -22,6 +22,7 @@
 		C6C2E71226A1289B0037A695 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E70826A1289B0037A695 /* Lato-BlackItalic.ttf */; };
 		C6C2E71426A1FE4C0037A695 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71326A1FE4C0037A695 /* DetailViewController.swift */; };
 		C6C2E71626A200720037A695 /* detail.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71526A200720037A695 /* detail.png */; };
+		C6C2E71826A2280C0037A695 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71726A2280C0037A695 /* FilterViewController.swift */; };
 		C6F9CC6A26A0941D007D68A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */; };
 		C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */; };
 		C6F9CC6E26A0941D007D68A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6D26A0941D007D68A0 /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		C6C2E70826A1289B0037A695 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		C6C2E71326A1FE4C0037A695 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C6C2E71526A200720037A695 /* detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail.png; sourceTree = "<group>"; };
+		C6C2E71726A2280C0037A695 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		C6F9CC6626A0941D007D68A0 /* FleetioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleetioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				C6F9CC8A26A0EA33007D68A0 /* TableViewCell.swift */,
 				C6C2E6F926A1202A0037A695 /* MapView.swift */,
 				C6C2E71326A1FE4C0037A695 /* DetailViewController.swift */,
+				C6C2E71726A2280C0037A695 /* FilterViewController.swift */,
 				C6F9CC8626A0A94C007D68A0 /* AlertView.swift */,
 				C6F9CC8226A09EB1007D68A0 /* Api.swift */,
 				C6F9CC8426A09F9C007D68A0 /* Tool.swift */,
@@ -295,6 +298,7 @@
 				C6F9CC6A26A0941D007D68A0 /* AppDelegate.swift in Sources */,
 				C6F9CC8326A09EB1007D68A0 /* Api.swift in Sources */,
 				C6F9CC8926A0E9F8007D68A0 /* TableView.swift in Sources */,
+				C6C2E71826A2280C0037A695 /* FilterViewController.swift in Sources */,
 				C6F9CC8526A09F9C007D68A0 /* Tool.swift in Sources */,
 				C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */,
 				C6C2E71426A1FE4C0037A695 /* DetailViewController.swift in Sources */,

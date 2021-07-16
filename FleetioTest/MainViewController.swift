@@ -193,16 +193,18 @@ class MainViewController: UIViewController, TableViewDelegate {
     }
     
     @objc private func mainFilterBtAction(sender: UIButton!) {
-        print("Filter")
+        let filterVc = FilterViewController()
+        //filterVc.detailVcViewControllerDelegate = self
+        filterVc.modalPresentationStyle = .formSheet
+        filterVc.modalTransitionStyle = .coverVertical
+        self.present(filterVc, animated: true, completion: nil)
     }
     
     // TableViewDelegate
     func mainOpenDetail(nb: UInt) {
         let detailVc = DetailViewController()
-        //detailVc.detailVcViewControllerDelegate = self
         detailVc.modalPresentationStyle = .formSheet
         detailVc.modalTransitionStyle = .coverVertical
         self.present(detailVc, animated: true, completion: nil)
     }
 }
-
