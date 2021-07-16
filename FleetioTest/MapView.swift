@@ -41,9 +41,9 @@ class MapView: UIView {
         
         // Label
         mapLb.textColor = .black
-        mapLb.text = "fuel entries"
+        mapLb.text = "f u e l    e n t r i e s"
         mapLb.textAlignment = .center
-        mapLb.font =  UIFont(name: "AlegreyaSans-Bold", size: 32)
+        mapLb.font =  UIFont(name: "Lato-Bold", size: 24)
         mapLb.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mapLb)
         

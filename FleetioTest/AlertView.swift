@@ -29,7 +29,7 @@ class AlertView: UIView {
         // Title
         alertTitleLb.text = "Oops!"
         alertTitleLb.textColor = .black
-        alertTitleLb.font = UIFont(name: "AlegreyaSans-Bold", size: 24)
+        alertTitleLb.font = UIFont(name: "Lato-Bold", size: 24)
         alertTitleLb.sizeToFit()
         alertTitleLb.translatesAutoresizingMaskIntoConstraints = false
         alertBackVi.addSubview(alertTitleLb)
@@ -42,7 +42,7 @@ class AlertView: UIView {
         alertTxtLb.numberOfLines = 0
         alertTxtLb.textColor = .black
         alertTxtLb.textAlignment = .center
-        alertTxtLb.font = UIFont(name: "AlegreyaSans-Regular", size: 24)
+        alertTxtLb.font = UIFont(name: "Lato-Regular", size: 24)
         alertTxtLb.sizeToFit()
         alertTxtLb.translatesAutoresizingMaskIntoConstraints = false
         alertBackVi.addSubview(alertTxtLb)
@@ -66,7 +66,7 @@ class AlertView: UIView {
         // First button
         alertStBt.setTitle("No", for: .normal)
         alertStBt.setTitleColor(.black, for: .normal)
-        alertStBt.titleLabel?.font = UIFont(name: "AlegreyaSans-Regular", size: 24)
+        alertStBt.titleLabel?.font = UIFont(name: "Lato-Regular", size: 24)
         alertStBt.addTarget(self, action: #selector(alertStBtTouch), for: .touchUpInside)
         alertStBt.translatesAutoresizingMaskIntoConstraints = false
         alertBackVi.addSubview(alertStBt)
@@ -80,7 +80,7 @@ class AlertView: UIView {
         // Second button
         alertNdBt.setTitle("Ok", for: .normal)
         alertNdBt.setTitleColor(.black, for: .normal)
-        alertNdBt.titleLabel?.font = UIFont(name: "AlegreyaSans-Bold", size: 24)
+        alertNdBt.titleLabel?.font = UIFont(name: "Lato-Bold", size: 24)
         alertNdBt.addTarget(self, action: #selector(alertNdBtTouch), for: .touchUpInside)
         alertNdBt.translatesAutoresizingMaskIntoConstraints = false
         alertBackVi.addSubview(alertNdBt)
