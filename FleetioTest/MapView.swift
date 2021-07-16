@@ -7,10 +7,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class MapView: UIView {
+class MapView: UIView, CLLocationManagerDelegate {
     let mapMkVi = MKMapView()
     let mapLb = UILabel()
+    
+    let mapLoc = CLLocationManager()
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -40,11 +43,14 @@ class MapView: UIView {
         NSLayoutConstraint.activate([hlMapMkViCst, hrMapMkViCst, vtMapMkViCst, vbMapMkViCst])
         
         // Label
-        mapLb.textColor = .black
+        mapLb.textColor = .darkGray
         mapLb.text = "f u e l    e n t r i e s"
         mapLb.textAlignment = .center
         mapLb.font =  UIFont(name: "Lato-Bold", size: 24)
         mapLb.translatesAutoresizingMaskIntoConstraints = false
+        mapLb.layer.shadowOffset = CGSize.zero
+        mapLb.layer.shadowOpacity = 0.5
+        mapLb.layer.shadowRadius = 4
         addSubview(mapLb)
         
         let hlMapLbCst = NSLayoutConstraint(item: mapLb, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0)
@@ -52,5 +58,48 @@ class MapView: UIView {
         let vtMapLbCst = NSLayoutConstraint(item: mapLb, attribute: .top, relatedBy: .equal, toItem: mapMkVi, attribute: .bottom, multiplier: 1, constant: 0)
         let vbMapLbCst = NSLayoutConstraint(item: mapLb, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([hlMapLbCst, hrMapLbCst, vtMapLbCst, vbMapLbCst])
+    }
+    
+    func mapLocCheck(escap: @escaping (UInt) -> Void) {
+        if CLLocationManager.locationServicesEnabled() {
+            switch mapLoc.authorizationStatus {
+            case .authorizedAlways, .authorizedWhenInUse:
+                escap(1)
+                break
+            case .denied:
+                escap(2)
+                break
+            default:
+                escap(0)
+                break
+            }
+        } else {
+            escap(0)
+        }
+    }
+    
+    func mapLocGet() {
+        mapLoc.delegate = self
+        mapLoc.requestLocation()
+    }
+    
+    // CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        mapLoc.requestWhenInUseAuthorization()
+        print ("Error locationManager: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            mapLoc.requestLocation()
+        } else {
+            mapLoc.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if locations.first != nil {
+            
+        }
     }
 }

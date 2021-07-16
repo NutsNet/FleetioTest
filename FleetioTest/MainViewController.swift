@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, TableViewDelegate {
     let api = Api.shared
     let tool = Tool.shared
     
@@ -23,6 +23,9 @@ class MainViewController: UIViewController {
     
     let mainLogoIv = UIImageView()
     
+    let mainFilterBt = UIButton()
+    var hrMainFilterBtCst: NSLayoutConstraint!
+    
     var dhw: CGFloat = 0
     
     override func viewDidLoad() {
@@ -30,6 +33,7 @@ class MainViewController: UIViewController {
         
         // Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(self.mainUpdateOrientation), name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.mainGetLoc), name: NSNotification.Name(rawValue: "mainGetLoc"), object: nil)
         
         // Self
         view.backgroundColor = .white
@@ -50,8 +54,7 @@ class MainViewController: UIViewController {
         
         // Table
         mainTv.alpha = 0
-        mainTv.rowHeight = UITableView.automaticDimension
-        mainTv.translatesAutoresizingMaskIntoConstraints = false
+        mainTv.tableViewDelegate = self
         view.addSubview(mainTv)
         
         let wtMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
@@ -69,6 +72,7 @@ class MainViewController: UIViewController {
         hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
         vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -dhw/2)
         NSLayoutConstraint.activate([wtMapViCst, htMapViCst, hcMapViCst, vcMapViCst])
+        
         // Logo
         mainLogoIv.image = UIImage(named: "logo")
         mainLogoIv.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +83,22 @@ class MainViewController: UIViewController {
         let hcMainLogoIvCst = NSLayoutConstraint(item: mainLogoIv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
         let vcMainLogoIvCst = NSLayoutConstraint(item: mainLogoIv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([wtMainLogoIvCst, htMainLogoIvCst, hcMainLogoIvCst, vcMainLogoIvCst])
+        
+        // Filter button
+        mainFilterBt.alpha = 0
+        mainFilterBt.setImage(UIImage(named: "logo"), for: .normal)
+        mainFilterBt.translatesAutoresizingMaskIntoConstraints = false
+        mainFilterBt.addTarget(self, action: #selector(mainFilterBtAction), for: .touchUpInside)
+        mainFilterBt.layer.shadowOffset = CGSize.zero
+        mainFilterBt.layer.shadowOpacity = 0.5
+        mainFilterBt.layer.shadowRadius = 4
+        view.addSubview(mainFilterBt)
+        
+        let wtMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
+        let htMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
+        hrMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -16)
+        let vtMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([wtMainFilterBtCst, htMainFilterBtCst, hrMainFilterBtCst, vtMainFilterBtCst])
         
         // Start
         UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
@@ -93,21 +113,34 @@ class MainViewController: UIViewController {
     }
     
     @objc func mainUpdateOrientation() {
-        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst])
+        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst])
         
         if tool.orientation == .portrait {
             hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
             vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: dhw/2)
             hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
             vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -dhw/2)
+            hrMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -16)
         } else {
             hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: dhw/2)
             vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
             hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: -(24 + dhw/2))
             vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+            hrMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -12)
         }
         
-        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst])
+        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst])
+    }
+    
+    @objc private func mainGetLoc() {
+        mapVi.mapLocCheck() { eta in
+            if eta == 0 {
+                self.mapVi.mapLocGet()
+            } else if eta == 2 {
+                self.mainDisplayAlert(nb: 2, txt: "")
+            }
+        }
+        
     }
     
     private func mainGetFuelEntries() {
@@ -121,6 +154,8 @@ class MainViewController: UIViewController {
                 if self.api.aApiFuelEntries.isEmpty {
                     self.mainDisplayAlert(nb: 1, txt: "There are no fuel entries.")
                 } else {
+                    print(self.api.aApiFuelEntries)
+                    
                     UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
                         self.mainTv.alpha = 1
                     }) { (finished) -> Void in
@@ -128,7 +163,13 @@ class MainViewController: UIViewController {
                         
                         UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
                             self.mapVi.alpha = 1
-                        }) { (finished) -> Void in }
+                        }) { (finished) -> Void in
+                            UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
+                                self.mainFilterBt.alpha = 1
+                            }) { (finished) -> Void in
+                                self.mainGetLoc()
+                            }
+                        }
                     }
                 }
             }
@@ -149,6 +190,19 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([hlAlertCst, hrAlertCst, vtAlertCst, vbAlertCst])
         
         alertVi.alertDisplay(nb: nb, txt: txt)
+    }
+    
+    @objc private func mainFilterBtAction(sender: UIButton!) {
+        print("Filter")
+    }
+    
+    // TableViewDelegate
+    func mainOpenDetail(nb: UInt) {
+        let detailVc = DetailViewController()
+        //detailVc.detailVcViewControllerDelegate = self
+        detailVc.modalPresentationStyle = .formSheet
+        detailVc.modalTransitionStyle = .coverVertical
+        self.present(detailVc, animated: true, completion: nil)
     }
 }
 

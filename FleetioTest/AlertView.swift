@@ -42,7 +42,7 @@ class AlertView: UIView {
         alertTxtLb.numberOfLines = 0
         alertTxtLb.textColor = .black
         alertTxtLb.textAlignment = .center
-        alertTxtLb.font = UIFont(name: "Lato-Regular", size: 24)
+        alertTxtLb.font = UIFont(name: "Lato-Regular", size: 16)
         alertTxtLb.sizeToFit()
         alertTxtLb.translatesAutoresizingMaskIntoConstraints = false
         alertBackVi.addSubview(alertTxtLb)
@@ -116,6 +116,9 @@ class AlertView: UIView {
         case 1:
             alertTxtLb.text = txt
             break
+        case 2:
+            alertTxtLb.text = "You locked the location for FleetioTest.\n\nDo you want to open the settings to unlock it?"
+            break
         default:
             break
         }
@@ -174,6 +177,9 @@ class AlertView: UIView {
     @objc func alertNdBtTouch(sender: UIButton!) {
         alertDismiss {
             switch self.alertNb {
+            case 2:
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                break
             default:
                 break
             }

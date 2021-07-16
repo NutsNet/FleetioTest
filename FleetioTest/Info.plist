@@ -75,5 +75,7 @@
 		<string>Lato-Thin.ttf</string>
 		<string>Lato-ThinItalic.ttf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>FleetioTest needs to access to your location to display the closest fuel entries.</string>
 </dict>
 </plist>

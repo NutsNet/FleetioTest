@@ -8,10 +8,10 @@
 import UIKit
 
 protocol TableViewDelegate {
-    //func mainOpenCell(companie: Companie)
+    func mainOpenDetail(nb: UInt)
 }
 
-class TableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
     var tableViewDelegate: TableViewDelegate?
     
     let api = Api.shared
@@ -28,6 +28,9 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         dataSource = self
         separatorStyle = .none
         backgroundColor = .clear
+        showsVerticalScrollIndicator = false
+        rowHeight = UITableView.automaticDimension
+        translatesAutoresizingMaskIntoConstraints = false
         register(TableViewCell.self as AnyClass, forCellReuseIdentifier: "TableViewCell")
     }
     
@@ -50,11 +53,20 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         let cell:TableViewCell = (tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell)!
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.tvcDelegate = self
+        
+        // Detail button
+        cell.tvcDetailBt.tag = indexPath.row
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //tableViewDelegate?.mainOpenCell(companie: api.aApiFuelEntries[indexPath.row])
+    }
+    
+    // TableViewCellDelegate
+    func tvOpenDetail(nb: UInt) {
+        tableViewDelegate?.mainOpenDetail(nb: nb)
     }
 }
