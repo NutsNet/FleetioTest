@@ -26,17 +26,17 @@ class TableViewCell: UITableViewCell {
         tvcBackVi.backgroundColor = .white
         tvcBackVi.contentMode = UIView.ContentMode.scaleAspectFill
         tvcBackVi.translatesAutoresizingMaskIntoConstraints = false
-        tvcBackVi.layer.cornerRadius = 10
+        tvcBackVi.layer.cornerRadius = 8
         tvcBackVi.layer.shadowColor = UIColor.black.cgColor
         tvcBackVi.layer.shadowOffset = CGSize(width: 0, height: 0)
         tvcBackVi.layer.shadowRadius = 4
-        tvcBackVi.layer.shadowOpacity = 0.1
+        tvcBackVi.layer.shadowOpacity = 0.15
         addSubview(tvcBackVi)
         
-        let wtTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: tool.currentDeviceWt - 20)
-        let htTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120)
+        let wtTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.width + 40)
+        let htTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128)
         let hcTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
-        let vtTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 20)
+        let vtTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 24)
         let vbTvcBackViCst = NSLayoutConstraint(item: tvcBackVi, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([wtTvcBackViCst, htTvcBackViCst, hcTvcBackViCst, vtTvcBackViCst, vbTvcBackViCst])
     }

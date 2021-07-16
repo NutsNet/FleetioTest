@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6011E23200B9CD56C305683F /* Pods_FleetioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA3D7040A2EA7D0ACF6FEB8 /* Pods_FleetioTest.framework */; };
 		C6C2E6F826A0EF480037A695 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6F726A0EF480037A695 /* logo.png */; };
+		C6C2E6FA26A1202A0037A695 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E6F926A1202A0037A695 /* MapView.swift */; };
+		C6C2E6FC26A1234D0037A695 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6FB26A1234D0037A695 /* filter.png */; };
 		C6F9CC6A26A0941D007D68A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */; };
 		C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */; };
 		C6F9CC6E26A0941D007D68A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6D26A0941D007D68A0 /* MainViewController.swift */; };
@@ -27,6 +29,8 @@
 		98E04B4A6C7C620F92FBE6EA /* Pods-FleetioTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleetioTest.debug.xcconfig"; path = "Target Support Files/Pods-FleetioTest/Pods-FleetioTest.debug.xcconfig"; sourceTree = "<group>"; };
 		9EA3D7040A2EA7D0ACF6FEB8 /* Pods_FleetioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleetioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C2E6F726A0EF480037A695 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		C6C2E6F926A1202A0037A695 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		C6C2E6FB26A1234D0037A695 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		C6F9CC6626A0941D007D68A0 /* FleetioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleetioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,7 @@
 		C6C2E6F626A0EF1E0037A695 /* Gfx */ = {
 			isa = PBXGroup;
 			children = (
+				C6C2E6FB26A1234D0037A695 /* filter.png */,
 				C6C2E6F726A0EF480037A695 /* logo.png */,
 			);
 			path = Gfx;
@@ -89,6 +94,7 @@
 				C6F9CC6D26A0941D007D68A0 /* MainViewController.swift */,
 				C6F9CC8826A0E9F8007D68A0 /* TableView.swift */,
 				C6F9CC8A26A0EA33007D68A0 /* TableViewCell.swift */,
+				C6C2E6F926A1202A0037A695 /* MapView.swift */,
 				C6F9CC8626A0A94C007D68A0 /* AlertView.swift */,
 				C6F9CC8226A09EB1007D68A0 /* Api.swift */,
 				C6F9CC8426A09F9C007D68A0 /* Tool.swift */,
@@ -178,6 +184,7 @@
 			files = (
 				C6C2E6F826A0EF480037A695 /* logo.png in Resources */,
 				C6F9CC7626A0941E007D68A0 /* LaunchScreen.storyboard in Resources */,
+				C6C2E6FC26A1234D0037A695 /* filter.png in Resources */,
 				C6F9CC7326A0941E007D68A0 /* Assets.xcassets in Resources */,
 				C6F9CC7126A0941D007D68A0 /* Main.storyboard in Resources */,
 			);
@@ -239,6 +246,7 @@
 				C6F9CC8926A0E9F8007D68A0 /* TableView.swift in Sources */,
 				C6F9CC8526A09F9C007D68A0 /* Tool.swift in Sources */,
 				C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */,
+				C6C2E6FA26A1202A0037A695 /* MapView.swift in Sources */,
 				C6F9CC8726A0A94C007D68A0 /* AlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

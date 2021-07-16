@@ -17,6 +17,10 @@ class MainViewController: UIViewController {
     var hcMainTvCst: NSLayoutConstraint!
     var vcMainTvCst: NSLayoutConstraint!
     
+    let mapVi = MapView()
+    var hcMapViCst: NSLayoutConstraint!
+    var vcMapViCst: NSLayoutConstraint!
+    
     let mainLogoIv = UIImageView()
     
     var dhw: CGFloat = 0
@@ -46,7 +50,6 @@ class MainViewController: UIViewController {
         
         // Table
         mainTv.alpha = 0
-        mainTv.backgroundColor = .red
         mainTv.rowHeight = UITableView.automaticDimension
         mainTv.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mainTv)
@@ -54,11 +57,18 @@ class MainViewController: UIViewController {
         let wtMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
         let htMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
         hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
-        vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -(24 + dhw/2))
+        vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: dhw/2)
         NSLayoutConstraint.activate([wtMainTvCst, htMainTvCst, hcMainTvCst, vcMainTvCst])
         
         // Map
+        mapVi.alpha = 0
+        view.addSubview(mapVi)
         
+        let wtMapViCst = NSLayoutConstraint(item: mapVi, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
+        let htMapViCst = NSLayoutConstraint(item: mapVi, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
+        hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -dhw/2)
+        NSLayoutConstraint.activate([wtMapViCst, htMapViCst, hcMapViCst, vcMapViCst])
         // Logo
         mainLogoIv.image = UIImage(named: "logo")
         mainLogoIv.translatesAutoresizingMaskIntoConstraints = false
@@ -83,17 +93,21 @@ class MainViewController: UIViewController {
     }
     
     @objc func mainUpdateOrientation() {
-        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst])
+        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst])
         
         if tool.orientation == .portrait {
             hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
-            vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -(24 + dhw/2))
+            vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: dhw/2)
+            hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+            vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -dhw/2)
         } else {
-            hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: -(24 + dhw/2))
+            hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: dhw/2)
             vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+            hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: -(24 + dhw/2))
+            vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
         }
         
-        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst])
+        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst])
     }
     
     private func mainGetFuelEntries() {
@@ -110,7 +124,11 @@ class MainViewController: UIViewController {
                     UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
                         self.mainTv.alpha = 1
                     }) { (finished) -> Void in
+                        self.mainTv.reloadData()
                         
+                        UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
+                            self.mapVi.alpha = 1
+                        }) { (finished) -> Void in }
                     }
                 }
             }
