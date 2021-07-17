@@ -10,6 +10,7 @@ import Alamofire
 
 class Api: NSObject {
     var aApiFuelEntries = [FuelEntrie]()
+    var aApiFilteredFuelEntries = [FuelEntrie]()
     
     var userLoc = [0.0, 0.0]
     
@@ -59,6 +60,9 @@ class Api: NSObject {
                         
                         //self.apiPrintFuelEntries()
                     }
+                    
+                    self.aApiFilteredFuelEntries = self.aApiFuelEntries
+                    
                     escap(false)
                 } else {
                     escap(true)

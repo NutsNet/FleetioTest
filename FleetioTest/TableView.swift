@@ -8,11 +8,14 @@
 import UIKit
 
 protocol TableViewDelegate {
-    func mainOpenDetail(nb: UInt)
+    func mainTablevRefresh()
+    func mainOpenDetail(fuelEntrie: FuelEntrie)
 }
 
 class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
     var tableViewDelegate: TableViewDelegate?
+    
+    let tableRc = UIRefreshControl()
     
     let api = Api.shared
     
@@ -28,10 +31,19 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
         dataSource = self
         separatorStyle = .none
         backgroundColor = .clear
+        refreshControl = tableRc
         showsVerticalScrollIndicator = false
         rowHeight = UITableView.automaticDimension
         translatesAutoresizingMaskIntoConstraints = false
         register(TableViewCell.self as AnyClass, forCellReuseIdentifier: "TableViewCell")
+        
+        // Refreash
+        tableRc.addTarget(self, action: #selector(tablevRefresh(_:)), for: .valueChanged)
+    }
+    
+    @objc private func tablevRefresh(_ sender: Any) {
+        tableRc.endRefreshing()
+        tableViewDelegate?.mainTablevRefresh()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -45,11 +57,11 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return api.aApiFuelEntries.count
+        return api.aApiFilteredFuelEntries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let fe = api.aApiFuelEntries[indexPath.row]
+        let fe = api.aApiFilteredFuelEntries[indexPath.row]
         
         let cell:TableViewCell = (tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell)!
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -94,11 +106,12 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //tableViewDelegate?.mainOpenCell(companie: api.aApiFuelEntries[indexPath.row])
+        tableViewDelegate?.mainOpenDetail(fuelEntrie: api.aApiFilteredFuelEntries[indexPath.row])
+        //tableViewDelegate?.mainOpenCell(companie: api.aApiFilteredFuelEntries[indexPath.row])
     }
     
     // TableViewCellDelegate
     func tvOpenDetail(nb: UInt) {
-        tableViewDelegate?.mainOpenDetail(nb: nb)
+        //tableViewDelegate?.mainOpenDetail(fuelEntrie: <#T##FuelEntrie#>)
     }
 }

@@ -90,7 +90,7 @@ class TableViewCell: UITableViewCell {
         
         // Vendor
         tvcVendorLb.textColor = .darkGray
-        tvcVendorLb.font =  UIFont(name: "Lato-Regular", size: 16)
+        tvcVendorLb.font =  UIFont(name: "Lato-Bold", size: 16)
         tvcVendorLb.translatesAutoresizingMaskIntoConstraints = false
         tvcVendorLb.layer.shadowOffset = CGSize.zero
         tvcVendorLb.layer.shadowOpacity = 0.25
@@ -135,7 +135,7 @@ class TableViewCell: UITableViewCell {
         
         // Cost
         tvcCostLb.textColor = .darkGray
-        tvcCostLb.font =  UIFont(name: "Lato-Regular", size: 16)
+        tvcCostLb.font =  UIFont(name: "Lato-Italic", size: 16)
         tvcCostLb.translatesAutoresizingMaskIntoConstraints = false
         tvcCostLb.layer.shadowOffset = CGSize.zero
         tvcCostLb.layer.shadowOpacity = 0.25

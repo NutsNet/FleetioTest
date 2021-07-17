@@ -46,7 +46,7 @@ class FilterViewController: UIViewController {
         
         // Title
         filterTitleLbt.textAlignment = .center
-        filterTitleLbt.text = "fuel entries filter"
+        filterTitleLbt.text = "Fuel Entries Filter"
         filterTitleLbt.font =  UIFont(name: "Lato-Bold", size: 24)
         filterTitleLbt.translatesAutoresizingMaskIntoConstraints = false
         filterTitleLbt.layer.shadowOffset = CGSize.zero

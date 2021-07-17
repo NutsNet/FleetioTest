@@ -144,6 +144,10 @@ class MainViewController: UIViewController, TableViewDelegate {
     }
     
     private func mainGetFuelEntries() {
+        mapVi.alpha = 0
+        mainTv.alpha = 0
+        mainFilterBt.alpha = 0
+        
         mainAc.startAnimating()
         api.apiGetFuelEntries { isError in
             self.mainAc.stopAnimating()
@@ -151,7 +155,7 @@ class MainViewController: UIViewController, TableViewDelegate {
             if isError {
                 self.mainDisplayAlert(nb: 1, txt: "Something went wrong when loading the fuel entries.\n\nPlease restart the app later or contact the support team.")
             } else {
-                if self.api.aApiFuelEntries.isEmpty {
+                if self.api.aApiFilteredFuelEntries.isEmpty {
                     self.mainDisplayAlert(nb: 1, txt: "There are no fuel entries.")
                 } else {
                     UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
@@ -199,8 +203,12 @@ class MainViewController: UIViewController, TableViewDelegate {
     }
     
     // TableViewDelegate
-    func mainOpenDetail(nb: UInt) {
-        let detailVc = DetailViewController()
+    func mainTablevRefresh() {
+        self.mainGetFuelEntries()
+    }
+    
+    func mainOpenDetail(fuelEntrie: FuelEntrie) {
+        let detailVc = DetailViewController(fuelEntrie: fuelEntrie)
         detailVc.modalPresentationStyle = .formSheet
         detailVc.modalTransitionStyle = .coverVertical
         self.present(detailVc, animated: true, completion: nil)

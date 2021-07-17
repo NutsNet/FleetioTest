@@ -13,6 +13,33 @@ class DetailViewController: UIViewController {
     let detailTitleLbt = UILabel()
     let detailExitBt = UIButton()
     
+    let detailSv = UIScrollView()
+        
+    let detailLogoIv = UIImageView()
+    let detailDateLb = UILabel()
+    let detailRefLb = UILabel()
+    let detailVendorLb = UILabel()
+    let detailVehicleLb = UILabel()
+    let detailFuelLb = UILabel()
+    
+    let detailCostHrLb = UILabel()
+    let detailCostMiLb = UILabel()
+    
+    let detailGallonLB = UILabel()
+    let detailPriceLb = UILabel()
+    
+    let detailLatitudeLb = UILabel()
+    let detailLongitudeLb = UILabel()
+    let detailDistanceLb = UILabel()
+    
+    var fuelEntrie = FuelEntrie()
+    
+    convenience init(fuelEntrie: FuelEntrie) {
+        self.init()
+        
+        self.fuelEntrie = fuelEntrie
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +73,7 @@ class DetailViewController: UIViewController {
         
         // Title
         detailTitleLbt.textAlignment = .center
-        detailTitleLbt.text = "fuel entrie detail"
+        detailTitleLbt.text = "Fuel Entrie Detail"
         detailTitleLbt.font =  UIFont(name: "Lato-Bold", size: 24)
         detailTitleLbt.translatesAutoresizingMaskIntoConstraints = false
         detailTitleLbt.layer.shadowOffset = CGSize.zero
@@ -59,6 +86,212 @@ class DetailViewController: UIViewController {
         let vtDetailTitleLbCst = NSLayoutConstraint(item: detailTitleLbt, attribute: .top, relatedBy: .equal, toItem: detailExitBt, attribute: .top, multiplier: 1, constant: 0)
         let vbDetailTitleLbCst = NSLayoutConstraint(item: detailTitleLbt, attribute: .bottom, relatedBy: .equal, toItem: detailExitBt, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([hlDetailTitleLbCst, hrDetailTitleLbCst, vtDetailTitleLbCst, vbDetailTitleLbCst])
+        
+        // Scroll view
+        detailSv.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(detailSv)
+        
+        let hlDetailSvCst = NSLayoutConstraint(item: detailSv, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
+        let hrDetailSvCst = NSLayoutConstraint(item: detailSv, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
+        let vtDetailSvCst = NSLayoutConstraint(item: detailSv, attribute: .top, relatedBy: .equal, toItem: detailTitleLbt, attribute: .bottom, multiplier: 1, constant: 0)
+        let vbDetailSvCst = NSLayoutConstraint(item: detailSv, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([hlDetailSvCst, hrDetailSvCst, vtDetailSvCst, vbDetailSvCst])
+        
+        // Logo
+        detailLogoIv.alpha = 1
+        detailLogoIv.backgroundColor = .white
+        detailLogoIv.image = UIImage(named: "logo")
+        detailLogoIv.translatesAutoresizingMaskIntoConstraints = false
+        detailLogoIv.layer.cornerRadius = 64
+        detailLogoIv.layer.shadowOffset = CGSize.zero
+        detailLogoIv.layer.shadowOpacity = 1
+        detailLogoIv.layer.shadowRadius = 4
+        detailSv.addSubview(detailLogoIv)
+        
+        let wtDetailLogoIvCst = NSLayoutConstraint(item: detailLogoIv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128)
+        let htDetailLogoIvCst = NSLayoutConstraint(item: detailLogoIv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128)
+        let hcDetailLogoIvCst = NSLayoutConstraint(item: detailLogoIv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        let vtDetailLogoIvCst = NSLayoutConstraint(item: detailLogoIv, attribute: .top, relatedBy: .equal, toItem: detailTitleLbt, attribute: .bottom, multiplier: 1, constant: 32)
+        NSLayoutConstraint.activate([wtDetailLogoIvCst, htDetailLogoIvCst, hcDetailLogoIvCst, vtDetailLogoIvCst])
+        
+        // Date
+        detailDateLb.text = "Date: "
+        detailDateLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailDateLb.sizeToFit()
+        detailDateLb.translatesAutoresizingMaskIntoConstraints = false
+        detailDateLb.layer.shadowOffset = CGSize.zero
+        detailDateLb.layer.shadowOpacity = 0.5
+        detailDateLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailDateLb)
+        
+        let hlDetailDateLbCst = NSLayoutConstraint(item: detailDateLb, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 48)
+        let vtDetailDateLbCst = NSLayoutConstraint(item: detailDateLb, attribute: .top, relatedBy: .equal, toItem: detailLogoIv, attribute: .bottom, multiplier: 1, constant: 32)
+        NSLayoutConstraint.activate([hlDetailDateLbCst, vtDetailDateLbCst])
+        
+        // Reference
+        detailRefLb.text = "Reference: \(fuelEntrie.reference)"
+        detailRefLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailRefLb.sizeToFit()
+        detailRefLb.translatesAutoresizingMaskIntoConstraints = false
+        detailRefLb.layer.shadowOffset = CGSize.zero
+        detailRefLb.layer.shadowOpacity = 0.5
+        detailRefLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailRefLb)
+        
+        let hlDetailRefLbCst = NSLayoutConstraint(item: detailRefLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailRefLbCst = NSLayoutConstraint(item: detailRefLb, attribute: .top, relatedBy: .equal, toItem: detailDateLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailRefLbCst, vtDetailRefLbCst])
+        
+        // Vendor
+        detailVendorLb.text = "Vendor: \(fuelEntrie.vendor_name)"
+        detailVendorLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailVendorLb.sizeToFit()
+        detailVendorLb.translatesAutoresizingMaskIntoConstraints = false
+        detailVendorLb.layer.shadowOffset = CGSize.zero
+        detailVendorLb.layer.shadowOpacity = 0.5
+        detailVendorLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailVendorLb)
+        
+        let hlDetailVendorLbCst = NSLayoutConstraint(item: detailVendorLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailVendorLbCst = NSLayoutConstraint(item: detailVendorLb, attribute: .top, relatedBy: .equal, toItem: detailRefLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailVendorLbCst, vtDetailVendorLbCst])
+        
+        // Vehicle
+        detailVehicleLb.text = "Vehicle: \(fuelEntrie.vehicle_name)"
+        detailVehicleLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailVehicleLb.sizeToFit()
+        detailVehicleLb.translatesAutoresizingMaskIntoConstraints = false
+        detailVehicleLb.layer.shadowOffset = CGSize.zero
+        detailVehicleLb.layer.shadowOpacity = 0.5
+        detailVehicleLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailVehicleLb)
+        
+        let hlDetailVehicleLbCst = NSLayoutConstraint(item: detailVehicleLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailVehicleLbCst = NSLayoutConstraint(item: detailVehicleLb, attribute: .top, relatedBy: .equal, toItem: detailVendorLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailVehicleLbCst, vtDetailVehicleLbCst])
+        
+        // Fuel
+        detailFuelLb.text = "Fuel: \(fuelEntrie.fuel_type_name)"
+        detailFuelLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailFuelLb.sizeToFit()
+        detailFuelLb.translatesAutoresizingMaskIntoConstraints = false
+        detailFuelLb.layer.shadowOffset = CGSize.zero
+        detailFuelLb.layer.shadowOpacity = 0.5
+        detailFuelLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailFuelLb)
+        
+        let hlDetailFuelLbCst = NSLayoutConstraint(item: detailFuelLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailFuelLbCst = NSLayoutConstraint(item: detailFuelLb, attribute: .top, relatedBy: .equal, toItem: detailVehicleLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailFuelLbCst, vtDetailFuelLbCst])
+        
+        // Cost Hr
+        detailCostHrLb.text = "Cost per hour: $\(fuelEntrie.cost_per_hr)"
+        detailCostHrLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailCostHrLb.sizeToFit()
+        detailCostHrLb.translatesAutoresizingMaskIntoConstraints = false
+        detailCostHrLb.layer.shadowOffset = CGSize.zero
+        detailCostHrLb.layer.shadowOpacity = 0.5
+        detailCostHrLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailCostHrLb)
+        
+        let hlDetailCostHrLbCst = NSLayoutConstraint(item: detailCostHrLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailCostHrLbCst = NSLayoutConstraint(item: detailCostHrLb, attribute: .top, relatedBy: .equal, toItem: detailFuelLb, attribute: .bottom, multiplier: 1, constant: 32)
+        NSLayoutConstraint.activate([hlDetailCostHrLbCst, vtDetailCostHrLbCst])
+        
+        // Cost Mi
+        detailCostMiLb.text = "Cost per mile: $\(fuelEntrie.cost_per_mi)"
+        detailCostMiLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailCostMiLb.sizeToFit()
+        detailCostMiLb.translatesAutoresizingMaskIntoConstraints = false
+        detailCostMiLb.layer.shadowOffset = CGSize.zero
+        detailCostMiLb.layer.shadowOpacity = 0.5
+        detailCostMiLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailCostMiLb)
+        
+        let hlDetailCostMiLbCst = NSLayoutConstraint(item: detailCostMiLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailCostMiLbCst = NSLayoutConstraint(item: detailCostMiLb, attribute: .top, relatedBy: .equal, toItem: detailCostHrLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailCostMiLbCst, vtDetailCostMiLbCst])
+        
+        // Gallon
+        detailGallonLB.text = "Gallons: \(fuelEntrie.us_gallons)"
+        detailGallonLB.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailGallonLB.sizeToFit()
+        detailGallonLB.translatesAutoresizingMaskIntoConstraints = false
+        detailGallonLB.layer.shadowOffset = CGSize.zero
+        detailGallonLB.layer.shadowOpacity = 0.5
+        detailGallonLB.layer.shadowRadius = 4
+        detailSv.addSubview(detailGallonLB)
+        
+        let hlDetailGallonLbCst = NSLayoutConstraint(item: detailGallonLB, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailGallonLbCst = NSLayoutConstraint(item: detailGallonLB, attribute: .top, relatedBy: .equal, toItem: detailCostMiLb, attribute: .bottom, multiplier: 1, constant: 32)
+        NSLayoutConstraint.activate([hlDetailGallonLbCst, vtDetailGallonLbCst])
+        
+        // Price
+        detailPriceLb.text = "Price per gallon: $\(fuelEntrie.price_per_volume_unit)"
+        detailPriceLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailPriceLb.sizeToFit()
+        detailPriceLb.translatesAutoresizingMaskIntoConstraints = false
+        detailPriceLb.layer.shadowOffset = CGSize.zero
+        detailPriceLb.layer.shadowOpacity = 0.5
+        detailPriceLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailPriceLb)
+        
+        let hlDetailPriceLbCst = NSLayoutConstraint(item: detailPriceLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailPriceLbCst = NSLayoutConstraint(item: detailPriceLb, attribute: .top, relatedBy: .equal, toItem: detailGallonLB, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailPriceLbCst, vtDetailPriceLbCst])
+        
+        // Latitude
+        detailLatitudeLb.text = "Latitude: \(fuelEntrie.latitude)"
+        detailLatitudeLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailLatitudeLb.sizeToFit()
+        detailLatitudeLb.translatesAutoresizingMaskIntoConstraints = false
+        detailLatitudeLb.layer.shadowOffset = CGSize.zero
+        detailLatitudeLb.layer.shadowOpacity = 0.5
+        detailLatitudeLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailLatitudeLb)
+        
+        let hlDetailLatitudeLbCst = NSLayoutConstraint(item: detailLatitudeLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailLatitudeLbCst = NSLayoutConstraint(item: detailLatitudeLb, attribute: .top, relatedBy: .equal, toItem: detailPriceLb, attribute: .bottom, multiplier: 1, constant: 32)
+        NSLayoutConstraint.activate([hlDetailLatitudeLbCst, vtDetailLatitudeLbCst])
+        
+        // Longitude
+        detailLongitudeLb.text = "Longitude: \(fuelEntrie.longitude)"
+        detailLongitudeLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailLongitudeLb.sizeToFit()
+        detailLongitudeLb.translatesAutoresizingMaskIntoConstraints = false
+        detailLongitudeLb.layer.shadowOffset = CGSize.zero
+        detailLongitudeLb.layer.shadowOpacity = 0.5
+        detailLongitudeLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailLongitudeLb)
+        
+        let hlDetailLongitudeLbCst = NSLayoutConstraint(item: detailLongitudeLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailLongitudeLbCst = NSLayoutConstraint(item: detailLongitudeLb, attribute: .top, relatedBy: .equal, toItem: detailLatitudeLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailLongitudeLbCst, vtDetailLongitudeLbCst])
+        
+        // Distance
+        detailDistanceLb.text = "Distance: \(fuelEntrie.distance_mi)"
+        detailDistanceLb.font =  UIFont(name: "Lato-Regular", size: 20)
+        detailDistanceLb.sizeToFit()
+        detailDistanceLb.translatesAutoresizingMaskIntoConstraints = false
+        detailDistanceLb.layer.shadowOffset = CGSize.zero
+        detailDistanceLb.layer.shadowOpacity = 0.5
+        detailDistanceLb.layer.shadowRadius = 4
+        detailSv.addSubview(detailDistanceLb)
+        
+        let hlDetailDistanceLbCst = NSLayoutConstraint(item: detailDistanceLb, attribute: .left, relatedBy: .equal, toItem: detailDateLb, attribute: .left, multiplier: 1, constant: 0)
+        let vtDetailDistanceLbCst = NSLayoutConstraint(item: detailDistanceLb, attribute: .top, relatedBy: .equal, toItem: detailLongitudeLb, attribute: .bottom, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([hlDetailDistanceLbCst, vtDetailDistanceLbCst])
+        
+        // Set scroll view content size
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.detailSv.contentSize.height = self.detailDistanceLb.frame.origin.y + self.detailDistanceLb.frame.height
+        }
     }
     
     @objc private func detailExitBtAction(sender: UIButton!) {
