@@ -68,8 +68,6 @@ class MapView: UIView, CLLocationManagerDelegate {
         if let mapLocation = mapLoc.location {
             api.userLoc[0] = mapLocation.coordinate.latitude
             api.userLoc[1] = mapLocation.coordinate.longitude
-            
-            print(api.userLoc)
         } else {
             print("Cannot update the user location")
         }

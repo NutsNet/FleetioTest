@@ -49,7 +49,7 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let companie = api.aApiFuelEntries[indexPath.row]
+        let fe = api.aApiFuelEntries[indexPath.row]
         
         let cell:TableViewCell = (tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell)!
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -57,6 +57,38 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
         
         // Detail button
         cell.tvcDetailBt.tag = indexPath.row
+        
+        // Vendor
+        if fe.vendor_name == "blank" {
+            cell.tvcVendorLb.text = "Vendor unknown"
+        } else {
+            cell.tvcVendorLb.text = fe.vendor_name
+        }
+        
+        // Vehicle
+        if fe.vehicle_name == "blank" {
+            cell.tvcVehicleLb.text = "Vehicle unknown"
+        } else {
+            cell.tvcVehicleLb.text = fe.vehicle_name
+        }
+        
+        // Fuel
+        if fe.fuel_type_name == "blank" {
+            cell.tvcFuelLb.text = "Fuel unknown"
+        } else {
+            cell.tvcFuelLb.text = fe.fuel_type_name
+        }
+        
+        // Fuel
+        if fe.cost_per_hr == -1 && fe.cost_per_mi == -1 {
+            cell.tvcCostLb.text = "Cost unknown"
+        } else if fe.cost_per_hr == -1 {
+            cell.tvcCostLb.text = "$\(fe.cost_per_mi)/mi"
+        } else if fe.cost_per_mi == -1 {
+            cell.tvcCostLb.text = "$\(fe.cost_per_hr)/hr"
+        } else {
+            cell.tvcCostLb.text = "$\(fe.cost_per_hr)/hr + $\(fe.cost_per_mi)/mi"
+        }
         
         return cell
     }
