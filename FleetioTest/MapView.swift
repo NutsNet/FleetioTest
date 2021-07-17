@@ -97,6 +97,20 @@ class MapView: UIView, CLLocationManagerDelegate {
         mapLoc.requestLocation()
     }
     
+    func mapCenterToCoordinates(latitude: Double, longitude: Double) {
+        var region = MKCoordinateRegion (
+            center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            latitudinalMeters: CLLocationDistance(exactly: 16000000)!,longitudinalMeters: CLLocationDistance(exactly: 16000000)!)
+        mapMkVi.setRegion(mapMkVi.regionThatFits(region), animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            region = MKCoordinateRegion (
+                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                latitudinalMeters: CLLocationDistance(exactly: 16000)!,longitudinalMeters: CLLocationDistance(exactly: 16000)!)
+            self.mapMkVi.setRegion(self.mapMkVi.regionThatFits(region), animated: true)
+        }
+    }
+    
     // CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         mapLoc.requestWhenInUseAuthorization()

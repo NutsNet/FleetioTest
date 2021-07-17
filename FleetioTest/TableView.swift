@@ -10,6 +10,7 @@ import UIKit
 protocol TableViewDelegate {
     func mainTablevRefresh()
     func mainOpenDetail(fuelEntrie: FuelEntrie)
+    func mainShowFuelEntrieOnMap(fuelEntrie: FuelEntrie)
 }
 
 class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
@@ -102,16 +103,22 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
             cell.tvcCostLb.text = "$\(fe.cost_per_hr)/hr + $\(fe.cost_per_mi)/mi"
         }
         
+        // Mag
+        if fe.latitude == -1 || fe.latitude == -1 {
+            cell.tvcDetailBt.isHidden = true
+        } else {
+            cell.tvcDetailBt.isHidden = false
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableViewDelegate?.mainOpenDetail(fuelEntrie: api.aApiFilteredFuelEntries[indexPath.row])
-        //tableViewDelegate?.mainOpenCell(companie: api.aApiFilteredFuelEntries[indexPath.row])
     }
     
     // TableViewCellDelegate
     func tvOpenDetail(nb: UInt) {
-        //tableViewDelegate?.mainOpenDetail(fuelEntrie: <#T##FuelEntrie#>)
+        tableViewDelegate?.mainShowFuelEntrieOnMap(fuelEntrie: api.aApiFilteredFuelEntries[Int(nb)])
     }
 }

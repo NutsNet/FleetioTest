@@ -197,7 +197,6 @@ class MainViewController: UIViewController, TableViewDelegate {
     
     @objc private func mainFilterBtAction(sender: UIButton!) {
         let filterVc = FilterViewController()
-        //filterVc.detailVcViewControllerDelegate = self
         filterVc.modalPresentationStyle = .formSheet
         filterVc.modalTransitionStyle = .coverVertical
         self.present(filterVc, animated: true, completion: nil)
@@ -213,5 +212,9 @@ class MainViewController: UIViewController, TableViewDelegate {
         detailVc.modalPresentationStyle = .formSheet
         detailVc.modalTransitionStyle = .coverVertical
         self.present(detailVc, animated: true, completion: { detailVc.detailUpdateOrientation() })
+    }
+    
+    func mainShowFuelEntrieOnMap(fuelEntrie: FuelEntrie) {
+        mapVi.mapCenterToCoordinates(latitude: fuelEntrie.latitude, longitude: fuelEntrie.longitude)
     }
 }
