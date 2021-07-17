@@ -74,7 +74,7 @@ class TableViewCell: UITableViewCell {
         
         // Detail
         tvcDetailBt.tag = 0
-        tvcDetailBt.setImage(UIImage(named: "detail"), for: .normal)
+        tvcDetailBt.setImage(UIImage(named: "mag"), for: .normal)
         tvcDetailBt.translatesAutoresizingMaskIntoConstraints = false
         tvcDetailBt.addTarget(self, action: #selector(tvcDetailBtAction), for: .touchUpInside)
         tvcDetailBt.layer.shadowOffset = CGSize.zero

@@ -86,12 +86,12 @@ class MainViewController: UIViewController, TableViewDelegate {
         
         // Filter button
         mainFilterBt.alpha = 0
-        mainFilterBt.setImage(UIImage(named: "logo"), for: .normal)
+        mainFilterBt.setImage(UIImage(named: "filter"), for: .normal)
         mainFilterBt.translatesAutoresizingMaskIntoConstraints = false
         mainFilterBt.addTarget(self, action: #selector(mainFilterBtAction), for: .touchUpInside)
         mainFilterBt.layer.shadowOffset = CGSize.zero
-        mainFilterBt.layer.shadowOpacity = 0.5
-        mainFilterBt.layer.shadowRadius = 4
+        mainFilterBt.layer.shadowOpacity = 0.25
+        mainFilterBt.layer.shadowRadius = 2
         view.addSubview(mainFilterBt)
         
         let wtMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
@@ -105,6 +105,7 @@ class MainViewController: UIViewController, TableViewDelegate {
             self.mainLogoIv.transform = CGAffineTransform.init(scaleX: 0.001, y: 0.001)
         }) { (finished) -> Void in
             self.mainGetFuelEntries()
+            self.mainUpdateOrientation()
         }
     }
     
@@ -211,6 +212,6 @@ class MainViewController: UIViewController, TableViewDelegate {
         let detailVc = DetailViewController(fuelEntrie: fuelEntrie)
         detailVc.modalPresentationStyle = .formSheet
         detailVc.modalTransitionStyle = .coverVertical
-        self.present(detailVc, animated: true, completion: nil)
+        self.present(detailVc, animated: true, completion: { detailVc.detailUpdateOrientation() })
     }
 }

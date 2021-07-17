@@ -21,9 +21,10 @@
 		C6C2E71126A1289B0037A695 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E70726A1289B0037A695 /* Lato-Bold.ttf */; };
 		C6C2E71226A1289B0037A695 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E70826A1289B0037A695 /* Lato-BlackItalic.ttf */; };
 		C6C2E71426A1FE4C0037A695 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71326A1FE4C0037A695 /* DetailViewController.swift */; };
-		C6C2E71626A200720037A695 /* detail.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71526A200720037A695 /* detail.png */; };
+		C6C2E71626A200720037A695 /* mag.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71526A200720037A695 /* mag.png */; };
 		C6C2E71826A2280C0037A695 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71726A2280C0037A695 /* FilterViewController.swift */; };
 		C6C2E71A26A22A470037A695 /* FuelEntrie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71926A22A470037A695 /* FuelEntrie.swift */; };
+		C6C2E71E26A384DA0037A695 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71D26A384DA0037A695 /* filter.png */; };
 		C6F9CC6A26A0941D007D68A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */; };
 		C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */; };
 		C6F9CC6E26A0941D007D68A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6D26A0941D007D68A0 /* MainViewController.swift */; };
@@ -54,9 +55,10 @@
 		C6C2E70726A1289B0037A695 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		C6C2E70826A1289B0037A695 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		C6C2E71326A1FE4C0037A695 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		C6C2E71526A200720037A695 /* detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail.png; sourceTree = "<group>"; };
+		C6C2E71526A200720037A695 /* mag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mag.png; sourceTree = "<group>"; };
 		C6C2E71726A2280C0037A695 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		C6C2E71926A22A470037A695 /* FuelEntrie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelEntrie.swift; sourceTree = "<group>"; };
+		C6C2E71D26A384DA0037A695 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		C6F9CC6626A0941D007D68A0 /* FleetioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleetioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				C6C2E6F726A0EF480037A695 /* logo.png */,
-				C6C2E71526A200720037A695 /* detail.png */,
+				C6C2E71D26A384DA0037A695 /* filter.png */,
+				C6C2E71526A200720037A695 /* mag.png */,
 			);
 			path = Gfx;
 			sourceTree = "<group>";
@@ -231,7 +234,8 @@
 			files = (
 				C6C2E6F826A0EF480037A695 /* logo.png in Resources */,
 				C6C2E70C26A1289B0037A695 /* Lato-Thin.ttf in Resources */,
-				C6C2E71626A200720037A695 /* detail.png in Resources */,
+				C6C2E71626A200720037A695 /* mag.png in Resources */,
+				C6C2E71E26A384DA0037A695 /* filter.png in Resources */,
 				C6C2E71226A1289B0037A695 /* Lato-BlackItalic.ttf in Resources */,
 				C6C2E70A26A1289B0037A695 /* Lato-Italic.ttf in Resources */,
 				C6C2E70926A1289B0037A695 /* Lato-LightItalic.ttf in Resources */,
