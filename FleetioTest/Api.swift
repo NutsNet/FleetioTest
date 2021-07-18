@@ -54,8 +54,6 @@ class Api: NSObject {
                             }
                         }
                         
-                        fuelEntrie.distance_mi = self.apiGetDistance()
-                        
                         self.aApiFuelEntries.append(fuelEntrie)
                         
                         //self.apiPrintFuelEntries()
@@ -72,11 +70,6 @@ class Api: NSObject {
                 print("Error in apiGetFuelEntries: \(error.localizedDescription)")
             }
         }
-    }
-    
-    func apiGetDistance() -> Double {
-        let distance: Double = -1
-        return distance
     }
     
     func apiPrintFuelEntries() {
@@ -96,7 +89,34 @@ class Api: NSObject {
             
             print("latitude              : \(fe.latitude)")
             print("longitude             : \(fe.longitude)")
-            print("distance_mi           : \(fe.distance_mi)")
         }
+    }
+    
+    func apiFilterNone() {
+        aApiFilteredFuelEntries = aApiFuelEntries
+    }
+    
+    func apiFilterFuel() {
+        aApiFilteredFuelEntries.removeAll()
+    }
+    
+    func apiFilterGallon() {
+        aApiFilteredFuelEntries.removeAll()
+    }
+    
+    func apiFilterHr() {
+        aApiFilteredFuelEntries.removeAll()
+    }
+    
+    func apiFilterMi() {
+        aApiFilteredFuelEntries.removeAll()
+    }
+    
+    func apiFilterPrice() {
+        aApiFilteredFuelEntries.removeAll()
+    }
+    
+    func apiFilterDistance() {
+        aApiFilteredFuelEntries.removeAll()
     }
 }

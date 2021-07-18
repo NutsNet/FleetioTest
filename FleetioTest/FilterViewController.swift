@@ -231,7 +231,7 @@ class FilterViewController: UIViewController {
             filterNoneBt.setTitle("\u{02713}  No filter",for: .normal)
             break
         case 1:
-            filterFuelBt.setTitle("\u{02713}  filterDistanceBt",for: .normal)
+            filterFuelBt.setTitle("\u{02713}  Group by type of fuel",for: .normal)
             break
         case 2:
             filterGallonBt.setTitle("\u{02713}  Gallon's level",for: .normal)
@@ -249,6 +249,7 @@ class FilterViewController: UIViewController {
             filterDistanceBt.setTitle("\u{02713}  Distance",for: .normal)
             break
         default:
+            filterNoneBt.setTitle("\u{02713}  No filter",for: .normal)
             break
         }
     }

@@ -276,5 +276,35 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
     // FilterViewControllerDelegate
     func mainSetFilterLvl(lvl: Int) {
         mainFilterLvl = lvl
+        
+        switch lvl {
+        case 0:
+            api.apiFilterNone()
+            break
+        case 1:
+            api.apiFilterFuel()
+            break
+        case 2:
+            api.apiFilterGallon()
+            break
+        case 3:
+            api.apiFilterHr()
+            break
+        case 4:
+            api.apiFilterMi()
+            break
+        case 5:
+            api.apiFilterPrice()
+            break
+        case 6:
+            api.apiFilterDistance()
+            break
+        default:
+            api.apiFilterNone()
+            break
+        }
+        
+        mainTv.reloadData()
+        mapVi.mapDisplayFuelEntries()
     }
 }
