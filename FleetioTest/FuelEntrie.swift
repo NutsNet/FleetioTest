@@ -22,5 +22,5 @@ class FuelEntrie: NSObject {
     
     var latitude: Double = -1
     var longitude: Double = -1
-    var distance_mi: Double = -1
+    var distance: Double = -1
 }

@@ -108,7 +108,7 @@ class Api: NSObject {
                         if fe.fuel_type_name == ffe.fuel_type_name {
                             aApiFilteredFuelEntries.insert(fe, at: idx)
                             break
-                        } else  if idx == aApiFilteredFuelEntries.count - 1 {
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
                             aApiFilteredFuelEntries.append(fe)
                         }
                     }
@@ -128,7 +128,8 @@ class Api: NSObject {
                     for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
                         if fe.us_gallons > ffe.us_gallons {
                             aApiFilteredFuelEntries.insert(fe, at: idx)
-                        } else {
+                            break
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
                             aApiFilteredFuelEntries.append(fe)
                         }
                     }
@@ -190,7 +191,8 @@ class Api: NSObject {
                     for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
                         if fe.price_per_volume_unit < ffe.price_per_volume_unit {
                             aApiFilteredFuelEntries.insert(fe, at: idx)
-                        } else {
+                            break
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
                             aApiFilteredFuelEntries.append(fe)
                         }
                     }
@@ -202,9 +204,24 @@ class Api: NSObject {
     func apiFilterDistance() {
         aApiFilteredFuelEntries.removeAll()
         
-        for fe in aApiFuelEntries {
-            if fe.latitude != -1 && fe.longitude != -1{
-                aApiFilteredFuelEntries.append(fe)
+        for (ind, fe) in aApiFuelEntries.enumerated() {
+            if fe.latitude != -1 && fe.longitude != -1 {
+                let distance = sqrtl(powl(fe.latitude - userLoc[0], 2) + powl(fe.longitude - userLoc[1], 2))
+                fe.distance = distance
+                aApiFuelEntries[ind].distance = distance
+                
+                if aApiFilteredFuelEntries.count == 0 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.distance < ffe.distance {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                            break
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
             }
         }
     }

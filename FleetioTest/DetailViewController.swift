@@ -339,7 +339,11 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailLongitudeLbCst, vtDetailLongitudeLbCst])
         
         // Distance
-        detailDistanceLb.text = "Distance: unknown"
+        if fuelEntrie.distance == -1 {
+            detailDistanceLb.text = "Longitude: unknown"
+        } else {
+            detailDistanceLb.text = "Longitude: \(fuelEntrie.distance)"
+        }
         
         detailDistanceLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailDistanceLb.sizeToFit()
