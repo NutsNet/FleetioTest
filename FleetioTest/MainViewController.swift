@@ -179,6 +179,9 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
         mainFilterBt.alpha = 0
         mainUserLocBt.alpha = 0
         
+        mainFilterLvl = 0
+        api.aApiFuelEntries.removeAll()
+        
         mainAc.startAnimating()
         api.apiGetFuelEntries { isError in
             self.mainAc.stopAnimating()
