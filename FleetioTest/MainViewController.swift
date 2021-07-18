@@ -297,7 +297,11 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
             api.apiFilterPrice()
             break
         case 6:
-            api.apiFilterDistance()
+            if api.userLoc[0] != 0 && api.userLoc[1] != 0 {
+                api.apiFilterDistance()
+            } else {
+                mainGetLoc()
+            }
             break
         default:
             api.apiFilterNone()
@@ -306,5 +310,11 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
         
         mainTv.reloadData()
         mapVi.mapDisplayFuelEntries()
+        
+        if api.aApiFilteredFuelEntries.count == 0 {
+            self.mainDisplayAlert(nb: 1, txt: "Sorry, no entries were found related to your filter.")
+        } else {
+            mainTv.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 }

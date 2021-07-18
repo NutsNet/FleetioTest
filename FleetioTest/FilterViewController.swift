@@ -200,7 +200,7 @@ class FilterViewController: UIViewController {
         NSLayoutConstraint.activate([hlFilterPriceGallonBtCst, vtFilterPriceGallonBtCst])
         
         // Distance
-        filterDistanceBt.setTitle("\u{02717}   Price per gallon",for: .normal)
+        filterDistanceBt.setTitle("\u{02717}   Distance",for: .normal)
         filterDistanceBt.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
         filterDistanceBt.addTarget(self, action: #selector(filterDistanceBtAction), for: .touchUpInside)
         filterDistanceBt.translatesAutoresizingMaskIntoConstraints = false

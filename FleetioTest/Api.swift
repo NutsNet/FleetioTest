@@ -55,11 +55,11 @@ class Api: NSObject {
                         }
                         
                         self.aApiFuelEntries.append(fuelEntrie)
-                        
-                        //self.apiPrintFuelEntries()
                     }
                     
                     self.aApiFilteredFuelEntries = self.aApiFuelEntries
+                    
+                    //self.apiPrintFuelEntries()
                     
                     escap(false)
                 } else {
@@ -84,8 +84,8 @@ class Api: NSObject {
             print("cost_per_hr           : \(fe.cost_per_hr)")
             print("cost_per_mi           : \(fe.cost_per_mi)")
             
-            print("us_gallons            : \(fe.cost_per_hr)")
-            print("price_per_volume_unit : \(fe.cost_per_mi)")
+            print("us_gallons            : \(fe.us_gallons)")
+            print("price_per_volume_unit : \(fe.price_per_volume_unit)")
             
             print("latitude              : \(fe.latitude)")
             print("longitude             : \(fe.longitude)")
@@ -98,25 +98,114 @@ class Api: NSObject {
     
     func apiFilterFuel() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.fuel_type_name != "blank" {
+                if aApiFilteredFuelEntries.count < 2 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.fuel_type_name == ffe.fuel_type_name {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                            break
+                        } else  if idx == aApiFilteredFuelEntries.count - 1 {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func apiFilterGallon() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.us_gallons != -1 {
+                if aApiFilteredFuelEntries.count == 0 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.us_gallons > ffe.us_gallons {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                        } else {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func apiFilterHr() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.cost_per_hr > 0 {
+                if aApiFilteredFuelEntries.count == 0 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.cost_per_hr < ffe.cost_per_hr {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                            break
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func apiFilterMi() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.cost_per_mi > 0 {
+                if aApiFilteredFuelEntries.count == 0 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.cost_per_mi < ffe.cost_per_mi {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                            break
+                        } else if idx == aApiFilteredFuelEntries.count - 1 {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func apiFilterPrice() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.price_per_volume_unit != -1 {
+                if aApiFilteredFuelEntries.count == 0 {
+                    aApiFilteredFuelEntries.append(fe)
+                } else {
+                    for (idx, ffe) in aApiFilteredFuelEntries.enumerated() {
+                        if fe.price_per_volume_unit < ffe.price_per_volume_unit {
+                            aApiFilteredFuelEntries.insert(fe, at: idx)
+                        } else {
+                            aApiFilteredFuelEntries.append(fe)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func apiFilterDistance() {
         aApiFilteredFuelEntries.removeAll()
+        
+        for fe in aApiFuelEntries {
+            if fe.latitude != -1 && fe.longitude != -1{
+                aApiFilteredFuelEntries.append(fe)
+            }
+        }
     }
 }
