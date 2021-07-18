@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, TableViewDelegate {
+class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     let api = Api.shared
     let tool = Tool.shared
     
@@ -65,6 +65,7 @@ class MainViewController: UIViewController, TableViewDelegate {
         
         // Map
         mapVi.alpha = 0
+        mapVi.mapViewDelegate = self
         view.addSubview(mapVi)
         
         let wtMapViCst = NSLayoutConstraint(item: mapVi, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: dhw)
@@ -139,6 +140,7 @@ class MainViewController: UIViewController, TableViewDelegate {
                 self.mainDisplayAlert(nb: 2, txt: "")
             } else {
                 self.mapVi.mapLocGet()
+                self.mapVi.mapDisplayFuelEntries()
             }
         }
         
@@ -216,5 +218,10 @@ class MainViewController: UIViewController, TableViewDelegate {
     
     func mainShowFuelEntrieOnMap(fuelEntrie: FuelEntrie) {
         mapVi.mapCenterToCoordinates(latitude: fuelEntrie.latitude, longitude: fuelEntrie.longitude)
+    }
+    
+    // MapViewDelegate
+    func mainTableMoveToCell(nb: Int) {
+        mainTv.scrollToRow(at: NSIndexPath(row: nb, section: 0) as IndexPath, at: .top, animated: true)
     }
 }

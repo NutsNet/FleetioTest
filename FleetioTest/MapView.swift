@@ -9,7 +9,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapView: UIView, CLLocationManagerDelegate {
+protocol MapViewDelegate {
+    func mainTableMoveToCell(nb: Int)
+}
+
+class MapView: UIView, CLLocationManagerDelegate, MKMapViewDelegate {
+    var mapViewDelegate: MapViewDelegate?
+    
     let api = Api.shared
     
     let mapMkVi = MKMapView()
@@ -34,6 +40,7 @@ class MapView: UIView, CLLocationManagerDelegate {
         layer.shadowOpacity = 0.25
         
         // Map
+        mapMkVi.delegate = self
         mapMkVi.translatesAutoresizingMaskIntoConstraints = false
         mapMkVi.layer.cornerRadius = 8
         addSubview(mapMkVi)
@@ -99,16 +106,35 @@ class MapView: UIView, CLLocationManagerDelegate {
     
     func mapCenterToCoordinates(latitude: Double, longitude: Double) {
         var region = MKCoordinateRegion (
-            center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            latitudinalMeters: CLLocationDistance(exactly: 16000000)!,longitudinalMeters: CLLocationDistance(exactly: 16000000)!)
+            center: CLLocationCoordinate2D(latitude: 45, longitude: -100),
+            latitudinalMeters: CLLocationDistance(exactly: 5000000)!,longitudinalMeters: CLLocationDistance(exactly: 5000000)!)
         mapMkVi.setRegion(mapMkVi.regionThatFits(region), animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             region = MKCoordinateRegion (
                 center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                latitudinalMeters: CLLocationDistance(exactly: 16000)!,longitudinalMeters: CLLocationDistance(exactly: 16000)!)
+                latitudinalMeters: CLLocationDistance(exactly: 1000)!,longitudinalMeters: CLLocationDistance(exactly: 1000)!)
             self.mapMkVi.setRegion(self.mapMkVi.regionThatFits(region), animated: true)
         }
+    }
+    
+    func mapDisplayFuelEntries() {
+        mapMkVi.removeAnnotations(mapMkVi.annotations)
+        
+        for (idx, fe) in api.aApiFilteredFuelEntries.enumerated() {
+            if fe.latitude != -1 && fe.longitude != -1 {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: fe.latitude, longitude: fe.longitude)
+                annotation.title = String(idx)
+                annotation.subtitle = fe.vehicle_name
+                mapMkVi.addAnnotation(annotation)
+            }
+        }
+    }
+    
+    // MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        mapViewDelegate?.mainTableMoveToCell(nb: Int(view.annotation!.title!!)!)
     }
     
     // CLLocationManagerDelegate
