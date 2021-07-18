@@ -26,7 +26,13 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     let mainFilterBt = UIButton()
     var hrMainFilterBtCst: NSLayoutConstraint!
     
+    let mainUserLocBt = UIButton()
+    var hlMainUserLocBtCst: NSLayoutConstraint!
+    var vtMainUserLocBtCst: NSLayoutConstraint!
+    
     var dhw: CGFloat = 0
+    
+    var mainCurrentAlert: AlertView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +107,22 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
         let vtMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 8)
         NSLayoutConstraint.activate([wtMainFilterBtCst, htMainFilterBtCst, hrMainFilterBtCst, vtMainFilterBtCst])
         
+        // Filter button
+        mainUserLocBt.alpha = 0
+        mainUserLocBt.setImage(UIImage(named: "loc"), for: .normal)
+        mainUserLocBt.translatesAutoresizingMaskIntoConstraints = false
+        mainUserLocBt.addTarget(self, action: #selector(mainUserLocBtAction), for: .touchUpInside)
+        mainUserLocBt.layer.shadowOffset = CGSize.zero
+        mainUserLocBt.layer.shadowOpacity = 0.25
+        mainUserLocBt.layer.shadowRadius = 2
+        view.addSubview(mainUserLocBt)
+        
+        let wtMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
+        let htMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
+        hlMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 16)
+        vtMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 8)
+        NSLayoutConstraint.activate([wtMainUserLocBtCst, htMainUserLocBtCst, hlMainUserLocBtCst, vtMainUserLocBtCst])
+        
         // Start
         UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
             self.mainLogoIv.transform = CGAffineTransform.init(scaleX: 0.001, y: 0.001)
@@ -115,7 +137,7 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     }
     
     @objc func mainUpdateOrientation() {
-        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst])
+        NSLayoutConstraint.deactivate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst, hlMainUserLocBtCst, vtMainUserLocBtCst])
         
         if tool.orientation == .portrait {
             hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
@@ -123,15 +145,19 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
             hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
             vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -dhw/2)
             hrMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -16)
+            hlMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 16)
+            vtMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 8)
         } else {
             hcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: dhw/2)
             vcMainTvCst = NSLayoutConstraint(item: mainTv, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
             hcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: -(24 + dhw/2))
             vcMapViCst = NSLayoutConstraint(item: mapVi, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
             hrMainFilterBtCst = NSLayoutConstraint(item: mainFilterBt, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -12)
+            hlMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .centerX, relatedBy: .equal, toItem: mainFilterBt, attribute: .centerX, multiplier: 1, constant: 0)
+            vtMainUserLocBtCst = NSLayoutConstraint(item: mainUserLocBt, attribute: .top, relatedBy: .equal, toItem: mainFilterBt, attribute: .bottom, multiplier: 1, constant: -12)
         }
         
-        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst])
+        NSLayoutConstraint.activate([hcMainTvCst, vcMainTvCst, hcMapViCst, vcMapViCst, hrMainFilterBtCst, hlMainUserLocBtCst, vtMainUserLocBtCst])
     }
     
     @objc private func mainGetLoc() {
@@ -140,7 +166,6 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
                 self.mainDisplayAlert(nb: 2, txt: "")
             } else {
                 self.mapVi.mapLocGet()
-                self.mapVi.mapDisplayFuelEntries()
             }
         }
         
@@ -150,6 +175,7 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
         mapVi.alpha = 0
         mainTv.alpha = 0
         mainFilterBt.alpha = 0
+        mainUserLocBt.alpha = 0
         
         mainAc.startAnimating()
         api.apiGetFuelEntries { isError in
@@ -171,8 +197,10 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
                         }) { (finished) -> Void in
                             UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: { () -> Void in
                                 self.mainFilterBt.alpha = 1
+                                self.mainUserLocBt.alpha = 1
                             }) { (finished) -> Void in
                                 self.mainGetLoc()
+                                self.mapVi.mapDisplayFuelEntries()
                             }
                         }
                     }
@@ -194,7 +222,16 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
         let vbAlertCst = NSLayoutConstraint(item: alertVi, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([hlAlertCst, hrAlertCst, vtAlertCst, vbAlertCst])
         
-        alertVi.alertDisplay(nb: nb, txt: txt)
+        if mainCurrentAlert == nil {
+            mainCurrentAlert = AlertView()
+            alertVi.alertDisplay(nb: nb, txt: txt)
+            mainCurrentAlert = alertVi
+        } else {
+            mainCurrentAlert?.alertDismiss {
+                alertVi.alertDisplay(nb: nb, txt: txt)
+                self.mainCurrentAlert = alertVi
+            }
+        }
     }
     
     @objc private func mainFilterBtAction(sender: UIButton!) {
@@ -202,6 +239,14 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
         filterVc.modalPresentationStyle = .formSheet
         filterVc.modalTransitionStyle = .coverVertical
         self.present(filterVc, animated: true, completion: nil)
+    }
+    
+    @objc private func mainUserLocBtAction(sender: UIButton!) {
+        if api.userLoc[0] != 0 && api.userLoc[1] != 0 {
+            mapVi.mapCenterToCoordinates(latitude: api.userLoc[0], longitude: api.userLoc[1])
+        } else {
+            mainGetLoc()
+        }
     }
     
     // TableViewDelegate
