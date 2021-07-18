@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol FilterViewControllerDelegate {
+    func mainSetFilterLvl(lvl: Int)
+}
+
 class FilterViewController: UIViewController {
+    var filterViewControllerDelegate: FilterViewControllerDelegate?
+    
     let filterFx = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
     
     let filterTitleLb = UILabel()
@@ -24,10 +30,19 @@ class FilterViewController: UIViewController {
     let filterPriceGallonBt = UIButton()
     let filterDistanceBt = UIButton()
     
+    var filterLvl = 0
+    
+    convenience init(filterLvl: Int) {
+        self.init()
+        
+        self.filterLvl = filterLvl
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Self
+        // Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.filterUpdateOrientation), name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
         
         // Fx
         filterFx.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +116,7 @@ class FilterViewController: UIViewController {
         NSLayoutConstraint.activate([wtDetailLogoIvCst, htDetailLogoIvCst, hcDetailLogoIvCst, vtDetailLogoIvCst])
         
         // None
-        filterNoneBt.setTitle("\u{02713}  No filter",for: .normal)
+        filterNoneBt.setTitle("\u{02717}  No filter",for: .normal)
         filterNoneBt.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
         filterNoneBt.addTarget(self, action: #selector(filterNoneBtAction), for: .touchUpInside)
         filterNoneBt.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +125,7 @@ class FilterViewController: UIViewController {
         filterNoneBt.layer.shadowRadius = 4
         filterSv.addSubview(filterNoneBt)
         
-        let hlFilterNoneBtCst = NSLayoutConstraint(item: filterNoneBt, attribute: .left, relatedBy: .equal, toItem: filterSv, attribute: .left, multiplier: 1, constant: 48)
+        let hlFilterNoneBtCst = NSLayoutConstraint(item: filterNoneBt, attribute: .left, relatedBy: .equal, toItem: filterLogoIv, attribute: .left, multiplier: 1, constant: -32)
         let vtFilterNoneBtCst = NSLayoutConstraint(item: filterNoneBt, attribute: .top, relatedBy: .equal, toItem: filterLogoIv, attribute: .bottom, multiplier: 1, constant: 48)
         NSLayoutConstraint.activate([hlFilterNoneBtCst, vtFilterNoneBtCst])
         
@@ -197,51 +212,93 @@ class FilterViewController: UIViewController {
         let hlFilterDistanceBtCst = NSLayoutConstraint(item: filterDistanceBt, attribute: .left, relatedBy: .equal, toItem: filterPriceGallonBt, attribute: .left, multiplier: 1, constant: 0)
         let vtFilterDistanceBtCst = NSLayoutConstraint(item: filterDistanceBt, attribute: .top, relatedBy: .equal, toItem: filterPriceGallonBt, attribute: .bottom, multiplier: 1, constant: 8)
         NSLayoutConstraint.activate([hlFilterDistanceBtCst, vtFilterDistanceBtCst])
+        
+        // Set filter level
+        filterSetLvl()
+    }
+    
+    @objc func filterUpdateOrientation() {
+        filterSv.contentSize.height = filterDistanceBt.frame.origin.y + filterDistanceBt.frame.height + 48
     }
     
     @objc private func filterExitBtAction(sender: UIButton!) {
         dismiss(animated: true, completion: nil)
     }
     
+    private func filterSetLvl() {
+        switch filterLvl {
+        case 0:
+            filterNoneBt.setTitle("\u{02713}  No filter",for: .normal)
+            break
+        case 1:
+            filterFuelBt.setTitle("\u{02713}  filterDistanceBt",for: .normal)
+            break
+        case 2:
+            filterGallonBt.setTitle("\u{02713}  Gallon's level",for: .normal)
+            break
+        case 3:
+            filterCostHrBt.setTitle("\u{02713}  Cost per hour",for: .normal)
+            break
+        case 4:
+            filterCostMiBt.setTitle("\u{02713}  Cost per mile",for: .normal)
+            break
+        case 5:
+            filterPriceGallonBt.setTitle("\u{02713}  Price per gallon",for: .normal)
+            break
+        case 6:
+            filterDistanceBt.setTitle("\u{02713}  Distance",for: .normal)
+            break
+        default:
+            break
+        }
+    }
+    
     @objc private func filterNoneBtAction(sender: UIButton!) {
         filterResetButton()
         filterNoneBt.setTitle("\u{02713}  No filter",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 0)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterFuelBtAction(sender: UIButton!) {
         filterResetButton()
         filterFuelBt.setTitle("\u{02713}  Group by type of fuel",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 1)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterGallonBtAction(sender: UIButton!) {
         filterResetButton()
         filterGallonBt.setTitle("\u{02713}  Gallon's level",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 2)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterCostHrBtAction(sender: UIButton!) {
         filterResetButton()
         filterCostHrBt.setTitle("\u{02713}  Cost per hour",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 3)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterCostMiBtAction(sender: UIButton!) {
         filterResetButton()
         filterCostMiBt.setTitle("\u{02713}  Cost per mile",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 4)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterPriceGallonBtAction(sender: UIButton!) {
         filterResetButton()
         filterPriceGallonBt.setTitle("\u{02713}  Price per gallon",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 5)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     
     @objc private func filterDistanceBtAction(sender: UIButton!) {
         filterResetButton()
-        filterDistanceBt.setTitle("\u{02713}  Price per gallon",for: .normal)
+        filterDistanceBt.setTitle("\u{02713}  Distance",for: .normal)
+        filterViewControllerDelegate?.mainSetFilterLvl(lvl: 6)
         filterExitBt.sendActions(for: .touchUpInside)
     }
     

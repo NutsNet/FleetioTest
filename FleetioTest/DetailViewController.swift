@@ -359,7 +359,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func detailUpdateOrientation() {
-        detailSv.contentSize.height = self.detailDistanceLb.frame.origin.y + self.detailDistanceLb.frame.height + 48
+        detailSv.contentSize.height = detailDistanceLb.frame.origin.y + detailDistanceLb.frame.height + 48
     }
     
     @objc private func detailExitBtAction(sender: UIButton!) {

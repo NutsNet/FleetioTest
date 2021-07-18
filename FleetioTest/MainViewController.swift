@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
+class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, FilterViewControllerDelegate {
     let api = Api.shared
     let tool = Tool.shared
     
@@ -31,6 +31,8 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     var vtMainUserLocBtCst: NSLayoutConstraint!
     
     var dhw: CGFloat = 0
+    
+    var mainFilterLvl = 0
     
     var mainCurrentAlert: AlertView?
     
@@ -235,10 +237,11 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     }
     
     @objc private func mainFilterBtAction(sender: UIButton!) {
-        let filterVc = FilterViewController()
+        let filterVc = FilterViewController(filterLvl: mainFilterLvl)
+        filterVc.filterViewControllerDelegate = self
         filterVc.modalPresentationStyle = .formSheet
         filterVc.modalTransitionStyle = .coverVertical
-        self.present(filterVc, animated: true, completion: nil)
+        self.present(filterVc, animated: true, completion: { filterVc.filterUpdateOrientation() })
     }
     
     @objc private func mainUserLocBtAction(sender: UIButton!) {
@@ -268,5 +271,10 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate {
     // MapViewDelegate
     func mainTableMoveToCell(nb: Int) {
         mainTv.scrollToRow(at: NSIndexPath(row: nb, section: 0) as IndexPath, at: .top, animated: true)
+    }
+    
+    // FilterViewControllerDelegate
+    func mainSetFilterLvl(lvl: Int) {
+        mainFilterLvl = lvl
     }
 }
