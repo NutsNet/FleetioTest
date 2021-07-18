@@ -130,11 +130,39 @@ class MapView: UIView, CLLocationManagerDelegate, MKMapViewDelegate {
                 mapMkVi.addAnnotation(annotation)
             }
         }
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: api.userLoc[0], longitude: api.userLoc[1])
+        annotation.title = "Me"
+        mapMkVi.addAnnotation(annotation)
     }
     
     // MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        mapViewDelegate?.mainTableMoveToCell(nb: Int(view.annotation!.title!!)!)
+        if view.annotation?.title != "Me" {
+            mapViewDelegate?.mainTableMoveToCell(nb: Int(view.annotation!.title!!)!)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is MKPointAnnotation) { return nil }
+        
+        if annotation.title == "Me" {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "anoId")
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "anoId")
+            }
+            else {
+                annotationView!.annotation = annotation
+            }
+            
+            annotationView!.image = UIImage(named: "pin")
+            
+            return annotationView
+        } else {
+            return nil
+        }
     }
     
     // CLLocationManagerDelegate

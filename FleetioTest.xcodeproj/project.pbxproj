@@ -26,6 +26,7 @@
 		C6C2E71A26A22A470037A695 /* FuelEntrie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E71926A22A470037A695 /* FuelEntrie.swift */; };
 		C6C2E71E26A384DA0037A695 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71D26A384DA0037A695 /* filter.png */; };
 		C6C2E72026A3D6E00037A695 /* loc.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E71F26A3D6E00037A695 /* loc.png */; };
+		C6C2E72226A4BC1C0037A695 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E72126A4BC1C0037A695 /* pin.png */; };
 		C6F9CC6A26A0941D007D68A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */; };
 		C6F9CC6C26A0941D007D68A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */; };
 		C6F9CC6E26A0941D007D68A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC6D26A0941D007D68A0 /* MainViewController.swift */; };
@@ -61,6 +62,7 @@
 		C6C2E71926A22A470037A695 /* FuelEntrie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelEntrie.swift; sourceTree = "<group>"; };
 		C6C2E71D26A384DA0037A695 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		C6C2E71F26A3D6E00037A695 /* loc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loc.png; sourceTree = "<group>"; };
+		C6C2E72126A4BC1C0037A695 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		C6F9CC6626A0941D007D68A0 /* FleetioTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleetioTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F9CC6926A0941D007D68A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F9CC6B26A0941D007D68A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				C6C2E6F726A0EF480037A695 /* logo.png */,
 				C6C2E71D26A384DA0037A695 /* filter.png */,
 				C6C2E71F26A3D6E00037A695 /* loc.png */,
+				C6C2E72126A4BC1C0037A695 /* pin.png */,
 				C6C2E71526A200720037A695 /* mag.png */,
 			);
 			path = Gfx;
@@ -250,6 +253,7 @@
 				C6F9CC7126A0941D007D68A0 /* Main.storyboard in Resources */,
 				C6C2E70B26A1289B0037A695 /* Lato-Light.ttf in Resources */,
 				C6C2E70D26A1289B0037A695 /* Lato-BoldItalic.ttf in Resources */,
+				C6C2E72226A4BC1C0037A695 /* pin.png in Resources */,
 				C6C2E71026A1289B0037A695 /* Lato-ThinItalic.ttf in Resources */,
 				C6C2E70E26A1289B0037A695 /* Lato-Regular.ttf in Resources */,
 			);
