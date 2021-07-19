@@ -171,6 +171,7 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
             }
         }
         
+        mapVi.mapDisplayFuelEntries()
     }
     
     private func mainGetFuelEntries() {
@@ -205,7 +206,6 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
                                 self.mainUserLocBt.alpha = 1
                             }) { (finished) -> Void in
                                 self.mainGetLoc()
-                                self.mapVi.mapDisplayFuelEntries()
                             }
                         }
                     }

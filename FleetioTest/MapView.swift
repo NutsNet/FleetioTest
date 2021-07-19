@@ -180,6 +180,8 @@ class MapView: UIView, CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil { }
+        if locations.first != nil {
+            mapDisplayFuelEntries()
+        }
     }
 }
