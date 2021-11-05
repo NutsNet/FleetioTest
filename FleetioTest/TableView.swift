@@ -52,7 +52,7 @@ class TableView: UITableView, UITableViewDelegate, UITableViewDataSource, TableV
         
         return foot
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 24
     }

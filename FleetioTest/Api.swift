@@ -17,8 +17,6 @@ class Api: NSObject {
     static let shared = Api()
     override init() {
         super.init()
-        
-        
     }
     
     func apiGetFuelEntries(escap:@escaping (Bool) -> Void) {
