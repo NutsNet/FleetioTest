@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6011E23200B9CD56C305683F /* Pods_FleetioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA3D7040A2EA7D0ACF6FEB8 /* Pods_FleetioTest.framework */; };
 		C6C2E6F826A0EF480037A695 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6F726A0EF480037A695 /* logo.png */; };
 		C6C2E6FA26A1202A0037A695 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E6F926A1202A0037A695 /* MapView.swift */; };
 		C6C2E70926A1289B0037A695 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6FF26A1289B0037A695 /* Lato-LightItalic.ttf */; };
@@ -38,12 +37,13 @@
 		C6F9CC8726A0A94C007D68A0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8626A0A94C007D68A0 /* AlertView.swift */; };
 		C6F9CC8926A0E9F8007D68A0 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8826A0E9F8007D68A0 /* TableView.swift */; };
 		C6F9CC8B26A0EA33007D68A0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8A26A0EA33007D68A0 /* TableViewCell.swift */; };
+		CBE692841074104AE02D285D /* Pods_FleetioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		175E124891E6754D13E2D968 /* Pods-FleetioTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleetioTest.release.xcconfig"; path = "Target Support Files/Pods-FleetioTest/Pods-FleetioTest.release.xcconfig"; sourceTree = "<group>"; };
+		66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleetioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E04B4A6C7C620F92FBE6EA /* Pods-FleetioTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleetioTest.debug.xcconfig"; path = "Target Support Files/Pods-FleetioTest/Pods-FleetioTest.debug.xcconfig"; sourceTree = "<group>"; };
-		9EA3D7040A2EA7D0ACF6FEB8 /* Pods_FleetioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleetioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C2E6F726A0EF480037A695 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		C6C2E6F926A1202A0037A695 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C6C2E6FF26A1289B0037A695 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6011E23200B9CD56C305683F /* Pods_FleetioTest.framework in Frameworks */,
+				CBE692841074104AE02D285D /* Pods_FleetioTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +174,7 @@
 		DC53E46B4E60D520B0453A82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9EA3D7040A2EA7D0ACF6FEB8 /* Pods_FleetioTest.framework */,
+				66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
