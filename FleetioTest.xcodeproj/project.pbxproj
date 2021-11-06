@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60DD69A2736E2B600C1D99D /* HeapSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60DD6982736DD8600C1D99D /* HeapSdk.framework */; };
+		C60DD69B2736E2B600C1D99D /* HeapSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C60DD6982736DD8600C1D99D /* HeapSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6C2E6F826A0EF480037A695 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6F726A0EF480037A695 /* logo.png */; };
 		C6C2E6FA26A1202A0037A695 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C2E6F926A1202A0037A695 /* MapView.swift */; };
 		C6C2E70926A1289B0037A695 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6C2E6FF26A1289B0037A695 /* Lato-LightItalic.ttf */; };
@@ -37,13 +39,26 @@
 		C6F9CC8726A0A94C007D68A0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8626A0A94C007D68A0 /* AlertView.swift */; };
 		C6F9CC8926A0E9F8007D68A0 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8826A0E9F8007D68A0 /* TableView.swift */; };
 		C6F9CC8B26A0EA33007D68A0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F9CC8A26A0EA33007D68A0 /* TableViewCell.swift */; };
-		CBE692841074104AE02D285D /* Pods_FleetioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C60DD69C2736E2B600C1D99D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C60DD69B2736E2B600C1D99D /* HeapSdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		175E124891E6754D13E2D968 /* Pods-FleetioTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleetioTest.release.xcconfig"; path = "Target Support Files/Pods-FleetioTest/Pods-FleetioTest.release.xcconfig"; sourceTree = "<group>"; };
-		66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleetioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E04B4A6C7C620F92FBE6EA /* Pods-FleetioTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleetioTest.debug.xcconfig"; path = "Target Support Files/Pods-FleetioTest/Pods-FleetioTest.debug.xcconfig"; sourceTree = "<group>"; };
+		C60DD6982736DD8600C1D99D /* HeapSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeapSdk.framework; path = Pods/HeapSdk.framework; sourceTree = "<group>"; };
 		C6C2E6F726A0EF480037A695 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		C6C2E6F926A1202A0037A695 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C6C2E6FF26A1289B0037A695 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -83,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBE692841074104AE02D285D /* Pods_FleetioTest.framework in Frameworks */,
+				C60DD69A2736E2B600C1D99D /* HeapSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +189,7 @@
 		DC53E46B4E60D520B0453A82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				66D1A6D6ABF9E0EC52D71922 /* Pods_FleetioTest.framework */,
+				C60DD6982736DD8600C1D99D /* HeapSdk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -191,6 +206,7 @@
 				C6F9CC6326A0941D007D68A0 /* Frameworks */,
 				C6F9CC6426A0941D007D68A0 /* Resources */,
 				C1F5980174EBC7A7D2A5480D /* [CP] Embed Pods Frameworks */,
+				C60DD69C2736E2B600C1D99D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -469,6 +485,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K5M2Q5H76U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				INFOPLIST_FILE = FleetioTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -489,6 +509,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K5M2Q5H76U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				INFOPLIST_FILE = FleetioTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

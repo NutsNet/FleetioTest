@@ -1,28 +1,16 @@
 PODS:
   - Alamofire (5.4.4)
-  - HeapSdk (0.0.3)
 
 DEPENDENCIES:
   - Alamofire
-  - HeapSdk (from `https://github.com/NutsNet/HeapSdk.git`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
 
-EXTERNAL SOURCES:
-  HeapSdk:
-    :git: https://github.com/NutsNet/HeapSdk.git
-
-CHECKOUT OPTIONS:
-  HeapSdk:
-    :commit: 833f2ac1ad07996bbb666cad6435fc36bac9b1d8
-    :git: https://github.com/NutsNet/HeapSdk.git
-
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
-  HeapSdk: 68c8bd249d6488ff90efa26376c1f9197681d370
 
-PODFILE CHECKSUM: eb6baff77dfc8156e5aea51796164f23736bd22c
+PODFILE CHECKSUM: 8a040d863aa34aa906d9d2ef759f56c0ae1e4fed
 
 COCOAPODS: 1.11.2
