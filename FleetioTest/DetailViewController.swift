@@ -104,6 +104,7 @@ class DetailViewController: UIViewController {
         detailLogoIv.alpha = 1
         detailLogoIv.backgroundColor = .white
         detailLogoIv.image = UIImage(named: "logo")
+        detailLogoIv.isUserInteractionEnabled = true
         detailLogoIv.translatesAutoresizingMaskIntoConstraints = false
         detailLogoIv.layer.cornerRadius = 64
         detailLogoIv.layer.shadowOffset = CGSize.zero
@@ -136,6 +137,7 @@ class DetailViewController: UIViewController {
             detailDateLb.text = "Date: " + newDateFormatter.string(from: date)
         }
         
+        detailDateLb.isUserInteractionEnabled = true
         detailDateLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailDateLb.sizeToFit()
         detailDateLb.translatesAutoresizingMaskIntoConstraints = false
@@ -155,6 +157,7 @@ class DetailViewController: UIViewController {
             detailRefLb.text = "Reference: \(fuelEntrie.reference)"
         }
         
+        detailRefLb.isUserInteractionEnabled = true
         detailRefLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailRefLb.sizeToFit()
         detailRefLb.translatesAutoresizingMaskIntoConstraints = false
@@ -174,6 +177,7 @@ class DetailViewController: UIViewController {
             detailVendorLb.text = "Vendor: \(fuelEntrie.vendor_name)"
         }
         
+        detailVendorLb.isUserInteractionEnabled = true
         detailVendorLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailVendorLb.sizeToFit()
         detailVendorLb.translatesAutoresizingMaskIntoConstraints = false
@@ -193,6 +197,7 @@ class DetailViewController: UIViewController {
             detailVehicleLb.text = "Vehicle: \(fuelEntrie.vehicle_name)"
         }
         
+        detailVehicleLb.isUserInteractionEnabled = true
         detailVehicleLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailVehicleLb.sizeToFit()
         detailVehicleLb.translatesAutoresizingMaskIntoConstraints = false
@@ -212,6 +217,7 @@ class DetailViewController: UIViewController {
             detailFuelLb.text = "Fuel: \(fuelEntrie.fuel_type_name)"
         }
         
+        detailFuelLb.isUserInteractionEnabled = true
         detailFuelLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailFuelLb.sizeToFit()
         detailFuelLb.translatesAutoresizingMaskIntoConstraints = false
@@ -231,6 +237,7 @@ class DetailViewController: UIViewController {
             detailCostHrLb.text = "Cost per hour: $\(fuelEntrie.cost_per_hr)"
         }
         
+        detailCostHrLb.isUserInteractionEnabled = true
         detailCostHrLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailCostHrLb.sizeToFit()
         detailCostHrLb.translatesAutoresizingMaskIntoConstraints = false
@@ -250,6 +257,7 @@ class DetailViewController: UIViewController {
             detailCostMiLb.text = "Cost per mile: $\(fuelEntrie.cost_per_mi)"
         }
         
+        detailCostMiLb.isUserInteractionEnabled = true
         detailCostMiLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailCostMiLb.sizeToFit()
         detailCostMiLb.translatesAutoresizingMaskIntoConstraints = false
@@ -269,6 +277,7 @@ class DetailViewController: UIViewController {
             detailGallonLB.text = "Gallons: \(fuelEntrie.us_gallons)"
         }
         
+        detailGallonLB.isUserInteractionEnabled = true
         detailGallonLB.font =  UIFont(name: "Lato-Regular", size: 20)
         detailGallonLB.sizeToFit()
         detailGallonLB.translatesAutoresizingMaskIntoConstraints = false
@@ -288,6 +297,7 @@ class DetailViewController: UIViewController {
             detailPriceLb.text = "Price per gallon: $\(fuelEntrie.price_per_volume_unit)"
         }
         
+        detailPriceLb.isUserInteractionEnabled = true
         detailPriceLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailPriceLb.sizeToFit()
         detailPriceLb.translatesAutoresizingMaskIntoConstraints = false
@@ -307,6 +317,7 @@ class DetailViewController: UIViewController {
             detailLatitudeLb.text = "Latitude: \(fuelEntrie.latitude)"
         }
         
+        detailLatitudeLb.isUserInteractionEnabled = true
         detailLatitudeLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailLatitudeLb.sizeToFit()
         detailLatitudeLb.translatesAutoresizingMaskIntoConstraints = false
@@ -326,6 +337,7 @@ class DetailViewController: UIViewController {
             detailLongitudeLb.text = "Longitude: \(fuelEntrie.longitude)"
         }
         
+        detailLongitudeLb.isUserInteractionEnabled = true
         detailLongitudeLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailLongitudeLb.sizeToFit()
         detailLongitudeLb.translatesAutoresizingMaskIntoConstraints = false
@@ -340,11 +352,12 @@ class DetailViewController: UIViewController {
         
         // Distance
         if fuelEntrie.distance == -1 {
-            detailDistanceLb.text = "Longitude: unknown"
+            detailDistanceLb.text = "Distance: unknown"
         } else {
-            detailDistanceLb.text = "Longitude: \(fuelEntrie.distance)"
+            detailDistanceLb.text = "Distance: \(fuelEntrie.distance)"
         }
         
+        detailDistanceLb.isUserInteractionEnabled = true
         detailDistanceLb.font =  UIFont(name: "Lato-Regular", size: 20)
         detailDistanceLb.sizeToFit()
         detailDistanceLb.translatesAutoresizingMaskIntoConstraints = false
