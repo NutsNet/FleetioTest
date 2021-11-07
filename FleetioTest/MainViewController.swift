@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HeapSdk
 
 class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, FilterViewControllerDelegate {
     let api = Api.shared
@@ -36,8 +35,6 @@ class MainViewController: UIViewController, TableViewDelegate, MapViewDelegate, 
     var mainFilterLvl = 0
     
     var mainCurrentAlert: AlertView?
-    
-    let hsdk = HSdk()
     
     override func viewDidLoad() {
         super.viewDidLoad()
