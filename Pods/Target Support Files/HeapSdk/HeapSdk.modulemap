@@ -1,0 +1,6 @@
+framework module HeapSdk {
+  umbrella header "HeapSdk-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,16 +1,21 @@
 PODS:
   - Alamofire (5.4.4)
+  - HeapSdk (0.1.0):
+    - Alamofire
 
 DEPENDENCIES:
   - Alamofire
+  - HeapSdk
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - HeapSdk
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  HeapSdk: f3d7ce9cfaeffa0ebf93dcb63a19cfc474affaea
 
-PODFILE CHECKSUM: 8a040d863aa34aa906d9d2ef759f56c0ae1e4fed
+PODFILE CHECKSUM: 4591e04530ba18313409ff8ddedc7ca6f0703bef
 
 COCOAPODS: 1.11.2
